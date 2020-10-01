@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import "./css/style.css";
 
 const roundHalf = (num) => Math.round(num * 2) / 2;
 const DPR = window.devicePixelRatio;
