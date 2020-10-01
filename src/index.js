@@ -1,32 +1,28 @@
 import Phaser from "phaser";
-import logoImg from "./assets/logo.png";
+
+const roundHalf = (num) => Math.round(num * 2) / 2;
+const DPR = window.devicePixelRatio;
+
+const isMobile = () => Math.min(screen.width, screen.height) <= 480;
+export const WIDTH = 640 * (isMobile() ? DPR : 4);
+const HEIGHT = 360 * (isMobile() ? DPR : 4);
+
+// will be 1, 1.5, 2, 2.5, 3, 3.5 or 4
+export const assetsDPR = roundHalf(Math.min(Math.max(WIDTH / 640, 1), 4));
 
 const config = {
   type: Phaser.AUTO,
-  parent: "phaser-example",
-  width: 800,
-  height: 600,
-  scene: {
-    preload: preload,
-    create: create
-  }
+  parent: "keyboard-mastery",
+  width: WIDTH,
+  height: HEIGHT,
+  dom: {
+    createContainer: true,
+  },
+  scale: {
+    mode: Phaser.DOM.FIT,
+    autoCenter: Phaser.DOM.CENTER_BOTH,
+  },
+  scene: [playGame],
 };
 
 const game = new Phaser.Game(config);
-
-function preload() {
-  this.load.image("logo", logoImg);
-}
-
-function create() {
-  const logo = this.add.image(400, 150, "logo");
-
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: "Power2",
-    yoyo: true,
-    loop: -1
-  });
-}
