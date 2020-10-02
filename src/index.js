@@ -1,5 +1,6 @@
-import Phaser from "phaser";
-import "./css/style.css";
+import Phaser from 'phaser';
+import playGame from './scenes/playGame';
+import './css/style.css';
 
 const roundHalf = (num) => Math.round(num * 2) / 2;
 const DPR = window.devicePixelRatio;
@@ -13,7 +14,7 @@ export const assetsDPR = roundHalf(Math.min(Math.max(WIDTH / 640, 1), 4));
 
 const config = {
   type: Phaser.AUTO,
-  parent: "keyboard-mastery",
+  parent: 'keyboard-mastery',
   width: WIDTH,
   height: HEIGHT,
   dom: {
