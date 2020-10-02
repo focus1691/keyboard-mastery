@@ -10,17 +10,21 @@ class playGame extends Phaser.Scene {
     this.hzMS = (1 / 60) * 1000;
   }
   preload() {
-    this.load.image("background", background);
+    this.load.image('background', background);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
   }
   create() {
+    console.log(this)
+
+    this.cameras.main.setBackgroundColor(0x66abdd);
+
     this.make.image({
-      key: "background",
-      x: 0,
+      key: 'background',
+      x: -150,
       y: 0,
-      width: this.cameras.main.width * assetsDPR * 8,
+      width: 2560,
       origin: { x: 0, y: 0 },
-      scale: { x: 4, y: 1 },
+      scale: { x: 4, y: 1.4 },
     });
 
     const row1 = [ 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' ];
