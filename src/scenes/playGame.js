@@ -27,22 +27,32 @@ class playGame extends Phaser.Scene {
       scale: { x: 4, y: 1.4 },
     });
 
-    const row1 = [ 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' ];
+    const KEYS = [
+      ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+      ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'L', ],
+      ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+    ];
 
     let x = 200;
+    let y = 200;
 
-    for (let i = 0; i < row1.length; i++) {
-      this.make.image({
-        key: 'keyboard',
-        frame: `${row1[i]}_paper.png`,
-        x,
-        y: 200,
-        origin: { x: 0, y: 0 },
-        scale: { x: 1.5, y: 1.5 },
-        angle: -20,
-      });
+    for (let i = 0; i < KEYS.length; i++) {
+      x = 200;
+      y += 126;
+      for (let j = 0; j < KEYS[i].length; j++) {
+        let key = KEYS[i][j];
 
-      x += 126;
+        this.make.image({
+          key: 'keyboard',
+          frame: `${key}_paper.png`,
+          x,
+          y,
+          origin: { x: 0, y: 0 },
+          scale: { x: 1.5, y: 1.5 },
+          angle: -20,
+        });
+        x += 126;
+      }
     }
 
     var atlasTexture = this.textures.get('keyboard');
