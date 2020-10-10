@@ -8,6 +8,7 @@ class playGame extends Phaser.Scene {
   init() {
     this.accumMS = 0;
     this.hzMS = (1 / 60) * 1000;
+    this.keys = {};
   }
   preload() {
     this.load.image('background', background);
@@ -42,7 +43,7 @@ class playGame extends Phaser.Scene {
       for (let j = 0; j < KEYS[i].length; j++) {
         let key = KEYS[i][j];
 
-        this.make.image({
+        this.keys[`${key.toLocaleLowerCase()}-key`] = this.make.image({
           key: 'keyboard',
           frame: `${key}_paper.png`,
           x,
@@ -55,10 +56,24 @@ class playGame extends Phaser.Scene {
       }
     }
 
-    var atlasTexture = this.textures.get('keyboard');
+    this.input.keyboard.on('keyup', function (event) {
+      console.log(this);
 
-    var frames = atlasTexture.getFrameNames();
-    // console.log(frames);
+      this.keys[`${event.key}-key`].frame = this.keys[`${event.key}-key`].texture.get(`${event.key}_pressed_paper.png`);
+
+      // this.keys[`${event.key}-key`].setFrame(`${event.key}_pressed_paper.png`);
+
+      this.tweens.add({
+        targets: this.keys[`${event.key}-key`],
+        delay: 1500,
+        onComplete: function () {
+          // this.keys[`${event.key}-key`].frame = this.keys[`${event.key}-key`].texture.get(`${event.key}_paper.png`);
+        }.bind(this),
+      });
+    
+    }, this);
+
+    var atlasTexture = this.textures.get('keyboard');
   }
   update(time, delta) {
     this.accumMS += delta;
