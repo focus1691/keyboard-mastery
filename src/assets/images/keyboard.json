@@ -1060,7 +1060,7 @@
 					}
 				},
 				{
-					"filename": "p__pressed_paper.png",
+					"filename": "p_pressed_paper.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2640,6 +2640,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:53c5ddb9b80fe57d92df464b64e5c2ea:ccc0dfa30438297c9516fbd08cfd05dd:bad03abb89ad027d879c383c13fd51bc$"
+		"smartupdate": "$TexturePacker:SmartUpdate:aa9896352f5ae6a64186307d9b1651ec:3f406a6f5626e6c6aea3fd99e249d3e7:bad03abb89ad027d879c383c13fd51bc$"
 	}
 }
