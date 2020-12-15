@@ -32,7 +32,6 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "owlbot-js": "^2.0.0",
     "phaser": "^3.24.1"
   }
 }
