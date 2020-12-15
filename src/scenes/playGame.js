@@ -118,9 +118,18 @@ class playGame extends Phaser.Scene {
   }
   submitWord() {
     // Check the word here and update the state
-    this.client.define(this.word).then(this.handleWordCorrect).catch(this.handleWordError);
+    // this.client.define(this.word).then(this.handleWordCorrect).catch(this.handleWordError);
+   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`)
+    .then((res) => res.json())
+    .then((result) => {
+      if (result.length > 0) {
+        handleWordCorrect();
+      } else {
+        handleWordError();
+      }
+    })
   }
-  handleWordCorrect(result) {
+  handleWordCorrect() {
     this.word = '';
   }
   handleWordError() {
