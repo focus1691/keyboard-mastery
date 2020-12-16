@@ -16,11 +16,11 @@ module.exports = {
         }
       },
       {
-        test: [/\.vert$/, /\.frag$/, /\.xml$/s],
+        test: [/\.vert$/, /\.frag$/],
         use: "raw-loader"
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml|ttf|mp3)$/i,
+        test: /\.(gif|png|jpe?g|svg|xml|ttf|mp3|xml)$/i,
         use: "file-loader"
       },
       {
