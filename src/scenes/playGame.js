@@ -1,3 +1,5 @@
+//* Game Objects
+import Keyboard from '../game-objects/keyboard';
 //* Images
 import background from '../assets/images/TexturesCom_PagePlain0008_4_masked_S.png';
 import keyboard from '../assets/images/keyboard.png';
@@ -22,7 +24,6 @@ class playGame extends Phaser.Scene {
     this.accumMS = 0;
     this.hzMS = (1 / 60) * 1000;
     this.word = '';
-    this.keys = {};
     this.answerSubmitted = false;
   }
   preload() {
@@ -44,32 +45,7 @@ class playGame extends Phaser.Scene {
       scale: { x: 4, y: 1.4 },
     });
 
-    let x = 150;
-    let y = 200;
-
-    for (let i = 0; i < KEYS.length; i++) {
-      if (i > 0) {
-        x = i === KEYS.length - 1 ? 500 : 200;
-      }
-
-      y += i === KEYS.length - 1 ? 126 + 126 / 1.5 : 126 * 1.2;
-      for (let j = 0; j < KEYS[i].length; j++) {
-        let key = KEYS[i][j];
-        const { scaleX, scaleY } = this.getKeyScaleFactor(key);
-        const angle = this.getKeyAngle(key);
-
-        this.keys[`${key.toLocaleLowerCase()}-key`] = this.make.image({
-          key: 'keyboard',
-          frame: `${key}_paper.png`,
-          x,
-          y: y + (key === 'enter' ? 50 : 0),
-          origin: { x: 0, y: 0 },
-          scale: { x: scaleX, y: scaleY },
-          angle,
-        });
-        x += (126 * assetsDPR) / 3;
-      }
-    }
+    this.keyboard = new Keyboard(this, { x: 150, y: 200 });
     this.text = this.add.bitmapText(150, 50, 'whereMyKeysFont', this.word).setFontSize(128);
 
     this.input.keyboard.on(
@@ -83,15 +59,18 @@ class playGame extends Phaser.Scene {
           key = 'space';
         }
 
-        if (this.keys[`${key}-key`]) {
+        if (this.keyboard.keys[`${key}-key`]) {
           if (key === 'enter') {
             this.answerSubmitted = true;
             this.submitWord();
+          } else if (key === 'backspace') {
+            this.word = this.word.substring(0, this.word.length - 1);
+            this.text.setText(this.word);
           } else {
             this.word += key;
             this.text.setText(this.word);
           }
-          this.keys[`${key}-key`].setFrame(`${key}_pressed_paper.png`);
+          this.keyboard.keys[`${key}-key`].setFrame(`${key}_pressed_paper.png`);
           this.sound.play('key_press');
         }
       },
@@ -108,27 +87,12 @@ class playGame extends Phaser.Scene {
           key = 'space';
         }
 
-        if (this.keys[`${key}-key`]) {
-          this.keys[`${key}-key`].setFrame(`${key}_paper.png`);
+        if (this.keyboard.keys[`${key}-key`]) {
+          this.keyboard.keys[`${key}-key`].setFrame(`${key}_paper.png`);
         }
       },
       this
     );
-  }
-  getKeyScaleFactor(key) {
-    if (key === 'enter') {
-      return { scaleX: assetsDPR, scaleY: assetsDPR / 1.5 };
-    }
-    if (key === 'space') {
-      return { scaleX: assetsDPR * 2, scaleY: assetsDPR / 1.5 };
-    }
-    return { scaleX: assetsDPR / 2, scaleY: assetsDPR / 2 };
-  }
-  getKeyAngle(key) {
-    if (key === 'space') {
-      return -8;
-    }
-    return -20;
   }
   submitWord() {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`)
@@ -140,7 +104,7 @@ class playGame extends Phaser.Scene {
           handleWordError();
         }
         this.answerSubmitted = false;
-      })
+      });
   }
   handleWordCorrect() {
     this.word = '';
