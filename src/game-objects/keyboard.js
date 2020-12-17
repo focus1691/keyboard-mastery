@@ -23,13 +23,12 @@ class Keyboard extends Phaser.GameObjects.Container {
         this.keys[`${key.toLocaleLowerCase()}-key`] = this.scene.make.image({
           key: 'keyboard',
           frame: `${key}_paper.png`,
-          x,
-          y: y + (key === 'enter' ? 50 : 0),
+          x: key === 'enter' ? x + 20 : x,
+          y: y + (key === 'enter' ? 0 : 0),
           origin: { x: 0, y: 0 },
-          // scale: { x: scaleX, y: scaleY },
           angle,
         });
-        x += (75);
+        x += 75;
       }
     }
 
@@ -51,6 +50,6 @@ class Keyboard extends Phaser.GameObjects.Container {
     }
     return -20;
   }
-};
+}
 
 export default Keyboard;
