@@ -11,14 +11,6 @@ import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_pre
 import whereMyKeysImg from '../assets/fonts/where_my_keys/font.png';
 import whereMyKeysXML from '../assets/fonts/where_my_keys/font.xml';
 
-const KEYS = [
-  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'minus', 'plus', 'backspace'],
-  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'enter'],
-  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'L'],
-  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
-  ['space'],
-];
-
 class playGame extends Phaser.Scene {
   init() {
     this.accumMS = 0;
