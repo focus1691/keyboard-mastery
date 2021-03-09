@@ -1,7 +1,6 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
 //* Images
-import background from '../assets/images/TexturesCom_PagePlain0008_4_masked_S.png';
 import keyboard from '../assets/images/keyboard.png';
 import keyboardJSON from '../assets/images/keyboard.json';
 import { assetsDPR, WIDTH } from '..';
@@ -21,21 +20,11 @@ class playGame extends Phaser.Scene {
   preload() {
     this.load.bitmapFont('whereMyKeysFont', whereMyKeysImg, whereMyKeysXML);
 
-    this.load.image('background', background);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.audio('key_press', keyPressSound);
   }
   create() {
     this.cameras.main.setBackgroundColor(0x66abdd);
-
-    this.make.image({
-      key: 'background',
-      x: -150,
-      y: 0,
-      width: 2560,
-      origin: { x: 0, y: 0 },
-      scale: { x: 4, y: 1.4 },
-    });
 
     this.keyboard = new Keyboard(this, { x: 150, y: 200 });
     this.text = this.add.bitmapText(150, 50, 'whereMyKeysFont', this.word).setFontSize(128);
