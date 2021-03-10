@@ -8,13 +8,6 @@ module.exports = merge(base, {
     filename: "bundle.min.js"
   },
   devtool: false,
-  devServer: {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-    }
-  },
   performance: {
     maxEntrypointSize: 900000,
     maxAssetSize: 900000
