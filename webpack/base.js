@@ -16,7 +16,7 @@ module.exports = {
         }
       },
       {
-        test: [/\.vert$/, /\.frag$/],
+        test: [/\.vert$/, /\.frag$/, /\.txt$/i],
         use: "raw-loader"
       },
       {
@@ -39,6 +39,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./index.html"
-    })
+    }),
   ]
 };

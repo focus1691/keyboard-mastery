@@ -18,6 +18,8 @@ class playGame extends Phaser.Scene {
     this.answerSubmitted = false;
   }
   preload() {
+    this.load.text('words', 'src/assets/words/en.txt');
+
     this.load.bitmapFont('whereMyKeysFont', whereMyKeysImg, whereMyKeysXML);
 
     this.load.atlas('keyboard', keyboard, keyboardJSON);
@@ -25,6 +27,8 @@ class playGame extends Phaser.Scene {
   }
   create() {
     this.cameras.main.setBackgroundColor(0x66abdd);
+
+    this.words = this.cache.text.get('words').split('\n');
 
     this.keyboard = new Keyboard(this, { x: 150, y: 200 });
     this.text = this.add.bitmapText(150, 50, 'whereMyKeysFont', this.word).setFontSize(128);
