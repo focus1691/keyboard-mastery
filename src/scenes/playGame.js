@@ -1,5 +1,7 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
+//* Utils
+import { binarySearch } from '../utils/search';
 //* Images
 import keyboard from '../assets/images/keyboard.png';
 import keyboardJSON from '../assets/images/keyboard.json';
