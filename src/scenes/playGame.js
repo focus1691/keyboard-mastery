@@ -1,11 +1,12 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
 //* Utils
+import { KEY_WIDTH, KEY_HEIGHT, ROWS, COLS } from '../utils/constants';
 import { binarySearch } from '../utils/search';
 //* Images
 import keyboard from '../assets/images/keyboard.png';
 import keyboardJSON from '../assets/images/keyboard.json';
-import { assetsDPR, WIDTH } from '..';
+import { assetsDPR, WIDTH, HEIGHT } from '..';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
 //* Fonts
@@ -32,7 +33,7 @@ class playGame extends Phaser.Scene {
 
     this.words = this.cache.text.get('words').split('\n');
 
-    this.keyboard = new Keyboard(this, { x: 150, y: 200 });
+    this.keyboard = new Keyboard(this, { x: WIDTH - ((KEY_WIDTH) * (COLS)), y: HEIGHT - ((KEY_HEIGHT) * (ROWS )) });
     this.text = this.add.bitmapText(150, 50, 'whereMyKeysFont', this.word).setFontSize(128);
 
     this.input.keyboard.on(

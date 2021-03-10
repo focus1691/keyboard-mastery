@@ -5,3 +5,8 @@ export const KEYS = [
   ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
   ['space'],
 ];
+
+export const KEY_WIDTH = 126;
+export const KEY_HEIGHT = 95;
+export const ROWS = 5;
+export const COLS = 13;

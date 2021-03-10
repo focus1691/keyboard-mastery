@@ -6,12 +6,12 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
-    let x = 150;
-    let y = 200;
+    let x = config.x;
+    let y = config.y;
 
     for (let i = 0; i < KEYS.length; i++) {
       if (i > 0) {
-        x = i === KEYS.length - 1 ? 500 : 200;
+        x = i === KEYS.length - 1 ? config.x + 300 : config.x;
       }
 
       y += i === KEYS.length - 1 ? 75 : 75;
@@ -29,6 +29,7 @@ class Keyboard extends Phaser.GameObjects.Container {
           angle,
         });
         x += 75;
+        console.log(this.keys[`${key.toLocaleLowerCase()}-key`].height);
       }
     }
 
