@@ -4,6 +4,7 @@ import Keyboard from '../game-objects/keyboard';
 import { KEY_WIDTH, KEY_HEIGHT, ROWS, COLS } from '../utils/constants';
 import { binarySearch } from '../utils/search';
 //* Images
+import backgroundImg from '../assets/images/background.png';
 import keyboard from '../assets/images/keyboard.png';
 import keyboardJSON from '../assets/images/keyboard.json';
 import { assetsDPR, WIDTH, HEIGHT } from '..';
@@ -22,6 +23,8 @@ class playGame extends Phaser.Scene {
   }
   preload() {
     this.load.text('words', 'src/assets/words/en.txt');
+    
+    this.load.image('background', backgroundImg);
 
     this.load.bitmapFont('whereMyKeysFont', whereMyKeysImg, whereMyKeysXML);
 
@@ -29,7 +32,14 @@ class playGame extends Phaser.Scene {
     this.load.audio('key_press', keyPressSound);
   }
   create() {
-    this.cameras.main.setBackgroundColor(0x66abdd);
+    this.make.image({
+      key: 'background',
+      x: 0,
+      y: 0,
+      width: this.cameras.main.width,
+      origin: { x: 0, y: 0 },
+      scale: { x: 1.5, y: 1.5 },
+    });
 
     this.words = this.cache.text.get('words').split('\n');
 
