@@ -6,6 +6,12 @@ import { binarySearch } from '../utils/search';
 //* Images
 import backgroundImg from '../assets/images/background.png';
 import keyboard from '../assets/images/keyboard.png';
+
+import keyboardContainer from '../assets/images/keyboard_container.png';
+import keyboardBackground from '../assets/images/keyboard_background.png';
+import keyboardOutline from '../assets/images/keyboard_outline.png';
+import wKey from '../assets/images/w_key.png';
+
 import keyboardJSON from '../assets/images/keyboard.json';
 import { assetsDPR, WIDTH, HEIGHT } from '..';
 //* Audio
@@ -19,25 +25,28 @@ class playGame extends Phaser.Scene {
   }
   preload() {
     this.load.text('words', 'src/assets/words/en.txt');
-    
+
     this.load.image('background', backgroundImg);
+
+    this.load.image('keyboard_container', keyboardContainer);
+    this.load.image('keyboard_background', keyboardBackground);
+    this.load.image('keyboard_outline', keyboardOutline);
+    this.load.image('w_key', wKey);
 
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.audio('key_press', keyPressSound);
   }
   create() {
-    this.make.image({
-      key: 'background',
-      x: 0,
-      y: 0,
-      width: this.cameras.main.width,
-      origin: { x: 0, y: 0 },
-      scale: { x: 1.5, y: 1.5 },
-    });
+    this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
+
+    this.make.image({ key: 'keyboard_container', x: WIDTH / 2, y: 230, scale: 0.3 });
+    this.make.image({ key: 'keyboard_background', x: WIDTH / 2, y: 230, scale: 0.3 });
+    this.make.image({ key: 'keyboard_outline', x: WIDTH / 2, y: 230, scale: 0.3 });
+    this.make.image({ key: 'w_key', x: WIDTH / 2, y: 230, scale: 0.3 });
 
     this.words = this.cache.text.get('words').split('\n');
 
-    this.keyboard = new Keyboard(this, { x: WIDTH - ((KEY_WIDTH) * (COLS)), y: HEIGHT - ((KEY_HEIGHT) * (ROWS )) });
+    this.keyboard = new Keyboard(this, { x: WIDTH - KEY_WIDTH * COLS, y: HEIGHT - KEY_HEIGHT * ROWS });
 
     this.input.keyboard.on(
       'keydown',
