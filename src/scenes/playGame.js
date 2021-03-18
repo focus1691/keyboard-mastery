@@ -10,10 +10,6 @@ import keyboardJSON from '../assets/images/keyboard.json';
 import { assetsDPR, WIDTH, HEIGHT } from '..';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
-//* Fonts
-import whereMyKeysImg from '../assets/fonts/where_my_keys/font.png';
-import whereMyKeysXML from '../assets/fonts/where_my_keys/font.xml';
-
 class playGame extends Phaser.Scene {
   init() {
     this.accumMS = 0;
@@ -25,8 +21,6 @@ class playGame extends Phaser.Scene {
     this.load.text('words', 'src/assets/words/en.txt');
     
     this.load.image('background', backgroundImg);
-
-    this.load.bitmapFont('whereMyKeysFont', whereMyKeysImg, whereMyKeysXML);
 
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.audio('key_press', keyPressSound);
@@ -44,7 +38,6 @@ class playGame extends Phaser.Scene {
     this.words = this.cache.text.get('words').split('\n');
 
     this.keyboard = new Keyboard(this, { x: WIDTH - ((KEY_WIDTH) * (COLS)), y: HEIGHT - ((KEY_HEIGHT) * (ROWS )) });
-    this.text = this.add.bitmapText(150, 50, 'whereMyKeysFont', this.word).setFontSize(128);
 
     this.input.keyboard.on(
       'keydown',
@@ -63,10 +56,8 @@ class playGame extends Phaser.Scene {
             this.submitWord();
           } else if (key === 'backspace') {
             this.word = this.word.substring(0, this.word.length - 1);
-            this.text.setText(this.word);
           } else {
             this.word += key;
-            this.text.setText(this.word);
           }
           this.keyboard.keys[`${key}-key`].setFrame(`${key}_pressed_paper.png`);
           this.sound.play('key_press');
@@ -118,9 +109,6 @@ class playGame extends Phaser.Scene {
     while (this.accumMS >= this.hzMS) {
       this.accumMS -= this.hzMS;
     }
-  }
-  render() {
-    this.children.bringToTop(this.text);
   }
 }
 
