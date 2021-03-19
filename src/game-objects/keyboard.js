@@ -1,5 +1,6 @@
 import { WIDTH, HEIGHT } from '../';
 import { KEYS, KEY_W, KEY_H, KEYBOARD_H, KEY_X_SPACE, KEY_Y_SPACE, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
+import { H as WORD_PANEL_H, SCALE_FACTOR_Y as WORD_PANEL_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
 import { half } from '../utils/math';
 
 class Keyboard extends Phaser.GameObjects.Container {
@@ -8,12 +9,13 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
+    const offsetY = -(WORD_PANEL_H * WORD_PANEL_SCALE_FACTOR_Y);
     let x = half(WIDTH) - (KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR * 4 - half((KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR);
-    let y = config.y - (KEY_H + KEY_Y_SPACE) * KEY_SCALE_FACTOR;
+    let y = config.y - (KEY_H + KEY_Y_SPACE) * KEY_SCALE_FACTOR + offsetY;
 
-    const c1 = this.scene.make.image({ key: 'keyboard_container', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
-    this.scene.make.image({ key: 'keyboard_background', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
-    this.scene.make.image({ key: 'keyboard_outline', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
+    this.scene.make.image({ key: 'keyboard_container', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR + offsetY , scale: KEY_SCALE_FACTOR });
+    this.scene.make.image({ key: 'keyboard_background', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR + offsetY, scale: KEY_SCALE_FACTOR });
+    this.scene.make.image({ key: 'keyboard_outline', x: half(WIDTH), y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR + offsetY, scale: KEY_SCALE_FACTOR });
 
     for (let i = 0; i < KEYS.length; i++) {
       for (let j = 0; j < KEYS[i].length; j++) {
