@@ -1,7 +1,7 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
 //* Utils
-import { KEY_WIDTH, KEY_HEIGHT, ROWS, COLS } from '../utils/constants';
+import { KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants';
 import { binarySearch } from '../utils/search';
 //* Images
 import backgroundImg from '../assets/images/background.png';
@@ -43,7 +43,7 @@ class playGame extends Phaser.Scene {
 
     this.words = this.cache.text.get('words').split('\n');
 
-    this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: 230 });
+    this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
 
     this.input.keyboard.on(
       'keydown',
@@ -65,7 +65,7 @@ class playGame extends Phaser.Scene {
           } else {
             this.word += key;
           }
-          this.keyboard.keys[`${key}-key`].setFrame(`${key}_pressed_paper.png`);
+          this.keyboard.keys[`${key}-key`].setFrame(`${key}_key_pressed.png`);
           this.sound.play('key_press');
         }
       },
@@ -83,7 +83,7 @@ class playGame extends Phaser.Scene {
         }
 
         if (this.keyboard.keys[`${key}-key`]) {
-          this.keyboard.keys[`${key}-key`].setFrame(`${key}_paper.png`);
+          this.keyboard.keys[`${key}-key`].setFrame(`${key}_key.png`);
         }
       },
       this
