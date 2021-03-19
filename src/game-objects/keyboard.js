@@ -9,7 +9,7 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
-    const offsetY = -(WORD_PANEL_H * WORD_PANEL_SCALE_FACTOR_Y);
+    const offsetY = -(WORD_PANEL_H * WORD_PANEL_SCALE_FACTOR_Y / 2);
     let x = half(WIDTH) - (KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR * 4 - half((KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR);
     let y = config.y - (KEY_H + KEY_Y_SPACE) * KEY_SCALE_FACTOR + offsetY;
 
