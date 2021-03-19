@@ -1,4 +1,5 @@
-import { KEYS } from '../utils/constants';
+import { assetsDPR, WIDTH, HEIGHT } from '../';
+import { KEYS, KEY_WIDTH, KEY_HEIGHT, KEY_X_SPACE, KEY_Y_SPACE, KEY_SCALE_FACTOR } from '../utils/constants';
 
 class Keyboard extends Phaser.GameObjects.Container {
   constructor(scene, config) {
@@ -6,33 +7,39 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
-    let x = config.x;
-    let y = config.y;
+    let x = WIDTH / 2 - (KEY_WIDTH / 2);
+    let y = config.y - (KEY_HEIGHT + KEY_Y_SPACE) * KEY_SCALE_FACTOR;
+
+
+    this.scene.make.image({ key: 'keyboard_container', x: WIDTH / 2, y: 230, scale: 0.3 });
+    this.scene.make.image({ key: 'keyboard_background', x: WIDTH / 2, y: 230, scale: 0.3 });
+    this.scene.make.image({ key: 'keyboard_outline', x: WIDTH / 2, y: 230, scale: 0.3 });
+    // this.scene.make.image({ key: 'w_key', x: WIDTH / 2, y: 230, scale: 0.3 });
+
+    //     this.keys[`w-key`] = this.scene.make.image({
+    //       key: 'keyboard',
+    //       frame: `w_key.png`,
+    //       x: x,
+    //       y: y,
+    //       // origin: { x: 0, y: 0 },
+    //       scale: 0.3,
+    //     });
 
     for (let i = 0; i < KEYS.length; i++) {
-      if (i > 0) {
-        x = i === KEYS.length - 1 ? config.x + 300 : config.x;
-      }
-
-      y += i === KEYS.length - 1 ? 75 : 75;
       for (let j = 0; j < KEYS[i].length; j++) {
-        let key = KEYS[i][j];
-        // const { scaleX, scaleY } = this.getKeyScaleFactor(key);
-        const angle = this.getKeyAngle(key);
-
+        const key = KEYS[i][j];
         this.keys[`${key.toLocaleLowerCase()}-key`] = this.scene.make.image({
           key: 'keyboard',
-          frame: `${key}_paper.png`,
-          x: key === 'enter' ? x + 20 : x,
-          y: y + (key === 'enter' ? 0 : 0),
-          origin: { x: 0, y: 0 },
-          angle,
+          frame: `${key}_key.png`,
+          x: x,
+          y: y,
+          scale: 0.3,
         });
-        x += 75;
-        console.log(this.keys[`${key.toLocaleLowerCase()}-key`].height);
+        x += KEY_WIDTH * KEY_SCALE_FACTOR;
       }
+      x = config.x;
+      y += KEY_HEIGHT * KEY_SCALE_FACTOR;
     }
-
     this.scene.add.existing(this);
   }
 

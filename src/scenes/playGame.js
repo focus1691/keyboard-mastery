@@ -5,14 +5,16 @@ import { KEY_WIDTH, KEY_HEIGHT, ROWS, COLS } from '../utils/constants';
 import { binarySearch } from '../utils/search';
 //* Images
 import backgroundImg from '../assets/images/background.png';
-import keyboard from '../assets/images/keyboard.png';
 
 import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
 import keyboardOutline from '../assets/images/keyboard_outline.png';
 import wKey from '../assets/images/w_key.png';
 
-import keyboardJSON from '../assets/images/keyboard.json';
+//* Sprites
+import keyboard from '../assets/sprites/keyboard.png';
+import keyboardJSON from '../assets/sprites/keyboard.json';
+
 import { assetsDPR, WIDTH, HEIGHT } from '..';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
@@ -39,14 +41,9 @@ class playGame extends Phaser.Scene {
   create() {
     this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
-    this.make.image({ key: 'keyboard_container', x: WIDTH / 2, y: 230, scale: 0.3 });
-    this.make.image({ key: 'keyboard_background', x: WIDTH / 2, y: 230, scale: 0.3 });
-    this.make.image({ key: 'keyboard_outline', x: WIDTH / 2, y: 230, scale: 0.3 });
-    this.make.image({ key: 'w_key', x: WIDTH / 2, y: 230, scale: 0.3 });
-
     this.words = this.cache.text.get('words').split('\n');
 
-    this.keyboard = new Keyboard(this, { x: WIDTH - KEY_WIDTH * COLS, y: HEIGHT - KEY_HEIGHT * ROWS });
+    this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: 230 });
 
     this.input.keyboard.on(
       'keydown',
