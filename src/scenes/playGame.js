@@ -9,7 +9,6 @@ import backgroundImg from '../assets/images/background.png';
 import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
 import keyboardOutline from '../assets/images/keyboard_outline.png';
-import wKey from '../assets/images/w_key.png';
 
 //* Sprites
 import keyboard from '../assets/sprites/keyboard.png';
@@ -18,6 +17,7 @@ import keyboardJSON from '../assets/sprites/keyboard.json';
 import { WIDTH, HEIGHT } from '..';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
+
 class playGame extends Phaser.Scene {
   init() {
     this.accumMS = 0;
@@ -33,7 +33,6 @@ class playGame extends Phaser.Scene {
     this.load.image('keyboard_container', keyboardContainer);
     this.load.image('keyboard_background', keyboardBackground);
     this.load.image('keyboard_outline', keyboardOutline);
-    this.load.image('w_key', wKey);
 
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.audio('key_press', keyPressSound);

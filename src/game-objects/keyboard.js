@@ -7,11 +7,10 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
-    let x = WIDTH / 2 - (((KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR) * 4) - (((KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR) / 2);
-    let y = config.y - ((KEY_HEIGHT + KEY_Y_SPACE) * KEY_SCALE_FACTOR);
+    let x = WIDTH / 2 - (KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR * 4 - ((KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR) / 2;
+    let y = config.y - (KEY_HEIGHT + KEY_Y_SPACE) * KEY_SCALE_FACTOR;
 
     const c1 = this.scene.make.image({ key: 'keyboard_container', x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
-    console.log(c1);
     this.scene.make.image({ key: 'keyboard_background', x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
     this.scene.make.image({ key: 'keyboard_outline', x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR, scale: KEY_SCALE_FACTOR });
 
@@ -28,10 +27,9 @@ class Keyboard extends Phaser.GameObjects.Container {
         x += (KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR;
       }
       if (i === 0) {
-        x = WIDTH / 2 - (((KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR) * 4);
-      }
-      else if (i === 1) {
-        x = WIDTH / 2 - (((KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR) * 3);
+        x = WIDTH / 2 - (KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR * 4;
+      } else if (i === 1) {
+        x = WIDTH / 2 - (KEY_WIDTH + KEY_X_SPACE) * KEY_SCALE_FACTOR * 3;
       }
       y += (KEY_HEIGHT + KEY_Y_SPACE) * KEY_SCALE_FACTOR;
     }
