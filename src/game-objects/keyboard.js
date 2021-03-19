@@ -1,4 +1,4 @@
-import { assetsDPR, WIDTH, HEIGHT } from '../';
+import { WIDTH, HEIGHT } from '../';
 import { KEYS, KEY_WIDTH, KEY_HEIGHT, KEYBOARD_H, KEY_X_SPACE, KEY_Y_SPACE, KEY_SCALE_FACTOR } from '../utils/constants';
 
 class Keyboard extends Phaser.GameObjects.Container {
@@ -36,22 +36,6 @@ class Keyboard extends Phaser.GameObjects.Container {
       y += (KEY_HEIGHT + KEY_Y_SPACE) * KEY_SCALE_FACTOR;
     }
     this.scene.add.existing(this);
-  }
-
-  getKeyScaleFactor(key) {
-    if (key === 'enter') {
-      return { scaleX: assetsDPR, scaleY: assetsDPR / 1.5 };
-    }
-    if (key === 'space') {
-      return { scaleX: assetsDPR * 2, scaleY: assetsDPR / 1.5 };
-    }
-    return { scaleX: assetsDPR / 2, scaleY: assetsDPR / 2 };
-  }
-  getKeyAngle(key) {
-    if (key === 'space') {
-      return -8;
-    }
-    return -20;
   }
 }
 

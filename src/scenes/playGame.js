@@ -15,7 +15,7 @@ import wKey from '../assets/images/w_key.png';
 import keyboard from '../assets/sprites/keyboard.png';
 import keyboardJSON from '../assets/sprites/keyboard.json';
 
-import { assetsDPR, WIDTH, HEIGHT } from '..';
+import { WIDTH, HEIGHT } from '..';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
 class playGame extends Phaser.Scene {
