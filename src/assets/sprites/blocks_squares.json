@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "yellow_square_0004.png",
+					"filename": "yellow_square_004.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -603,6 +603,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:8bfb205e7d15fc0b9660cfb3130fc30c:e57f0b8a4810fcdf87b17c403b401cdd:633355a73e36b4881c36f3b2a7c59542$"
+		"smartupdate": "$TexturePacker:SmartUpdate:2ea8e96686a99991540fd5285fbd63d3:217ef82a64e9cbf38f6d878efdcb6b04:633355a73e36b4881c36f3b2a7c59542$"
 	}
 }
