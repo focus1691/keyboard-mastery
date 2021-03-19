@@ -4,8 +4,8 @@ export const KEYS = [
   ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
 ];
 
-export const KEY_WIDTH = 209;
-export const KEY_HEIGHT = 207;
+export const KEY_W = 209;
+export const KEY_H = 207;
 export const KEY_SCALE_FACTOR = 0.4;
 export const KEYBOARD_H = 707;
 export const KEY_Y_SPACE = 40;

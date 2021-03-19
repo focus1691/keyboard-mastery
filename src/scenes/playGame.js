@@ -1,10 +1,12 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
+import WordPanel from '../game-objects/wordPanel';
 //* Utils
-import { KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants';
+import { KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { binarySearch } from '../utils/search';
 //* Images
 import backgroundImg from '../assets/images/background.png';
+import wordPanelImg from '../assets/images/word_panel.png';
 
 import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
@@ -30,6 +32,8 @@ class playGame extends Phaser.Scene {
 
     this.load.image('background', backgroundImg);
 
+    this.load.image('word_panel', wordPanelImg);
+
     this.load.image('keyboard_container', keyboardContainer);
     this.load.image('keyboard_background', keyboardBackground);
     this.load.image('keyboard_outline', keyboardOutline);
@@ -43,6 +47,8 @@ class playGame extends Phaser.Scene {
     this.words = this.cache.text.get('words').split('\n');
 
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
+
+    this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
     this.input.keyboard.on(
       'keydown',
