@@ -12,7 +12,9 @@ import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
 import keyboardOutline from '../assets/images/keyboard_outline.png';
 
-//* Sprites
+//* Spritesheets
+import blocksSquares from '../assets/sprites/blocks_squares.png';
+import blocksSquaresJSON from '../assets/sprites/blocks_squares.json';
 import keyboard from '../assets/sprites/keyboard.png';
 import keyboardJSON from '../assets/sprites/keyboard.json';
 
@@ -38,7 +40,9 @@ class playGame extends Phaser.Scene {
     this.load.image('keyboard_background', keyboardBackground);
     this.load.image('keyboard_outline', keyboardOutline);
 
+    this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
+
     this.load.audio('key_press', keyPressSound);
   }
   create() {
