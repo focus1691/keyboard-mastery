@@ -1,5 +1,6 @@
 //* Game Objects
 import Keyboard from '../game-objects/keyboard';
+import LetterBoard from '../game-objects/letterBoard';
 import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
@@ -11,6 +12,9 @@ import wordPanelImg from '../assets/images/word_panel.png';
 import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
 import keyboardOutline from '../assets/images/keyboard_outline.png';
+
+import letterBoardRow from '../assets/images/letterboard_row.png';
+import letterBoardNumber from '../assets/images/letterboard_number.png';
 
 //* Spritesheets
 import blocksSquares from '../assets/sprites/blocks_squares.png';
@@ -36,9 +40,17 @@ class playGame extends Phaser.Scene {
 
     this.load.image('word_panel', wordPanelImg);
 
+    //* Letterboard
+    this.load.image('letterboard_row', letterBoardRow);
+    this.load.image('letterboard_number', letterBoardNumber);
+
+    //* Keyboard
     this.load.image('keyboard_container', keyboardContainer);
     this.load.image('keyboard_background', keyboardBackground);
     this.load.image('keyboard_outline', keyboardOutline);
+
+    //* Word Panel
+    this.load.image('word_panel', wordPanelImg);
 
     this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
@@ -48,12 +60,13 @@ class playGame extends Phaser.Scene {
   create() {
     this.sound.volume = 0.1;
 
-    this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
-
     this.words = this.cache.text.get('words').split('\n');
 
-    this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
+    this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
+    //* Components
+    this.letterBoard = new LetterBoard(this, { x: 0, y: 0 });
+    this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
     this.input.keyboard.on(
