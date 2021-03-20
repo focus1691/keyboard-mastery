@@ -46,6 +46,8 @@ class playGame extends Phaser.Scene {
     this.load.audio('key_press', keyPressSound);
   }
   create() {
+    this.sound.volume = 0.1;
+
     this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
     this.words = this.cache.text.get('words').split('\n');
