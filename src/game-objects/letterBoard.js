@@ -2,7 +2,7 @@ import { KEYS } from '../utils/constants/keyboard';
 import { ROW_SCALE_FACTOR_X, ROW_SCALE_FACTOR_Y, NUM_SCALE_FACTOR_X, NUM_SCALE_FACTOR_Y, NUM_W, NUM_H, SQUARE_W, SQUARE_H } from '../utils/constants/letterboard';
 import { WIDTH, HEIGHT } from '../';
 import { half } from '../utils/math';
-import { getBlockColour } from '../utils/keyboard';
+import { getBlockData } from '../utils/keyboard';
 
 class letterBoard extends Phaser.GameObjects.Container {
   constructor(scene, config) {
@@ -42,57 +42,46 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.scene.add.existing(this);
   }
-  testaddBlock() {
-    for (let i = -9.5; i <= 9.5; i += 1) {
-      const block = this.scene.make.image({
-        x: 0,
-        y: 0,
-        key: 'blocks_squares',
-        frame: `${getBlockColour('q')}_square_000.png`,
-        scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
-      });
-      Phaser.Display.Align.In.Center(block, this.middleRow, SQUARE_W * i * ROW_SCALE_FACTOR_X, 0);
-
-      const text = this.scene.add.text(0, 0, 'f', { fontFamily: 'Paneuropa Freeway', fontSize: 48, color: '#000' });
-      Phaser.Display.Align.In.Center(text, block);
-
-      this.blocks.push({ block, text });
-    }
-  }
   constructBlocks(word) {
     for (let i = 0; i < word.length; i++) {
       const letter = word[i];
+      const { colour, value } = getBlockData(letter);
       const block = this.scene.make.image({
         x: 0,
         y: 0,
         key: 'blocks_squares',
-        frame: `${getBlockColour(letter)}_square_000.png`,
+        frame: `${colour}_square_000.png`,
         scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
       });
       const text = this.scene.add.text(0, 0, letter, { fontFamily: 'Paneuropa Freeway', fontSize: 48, color: '#000' });
 
-      if (KEYS[0].indexOf(word[i]) > -1) this.addTopBlock(block, text);
-      else if (KEYS[1].indexOf(word[i]) > -1) this.addMiddleBlock(block, text);
-      else if (KEYS[2].indexOf(word[i]) > -1) this.addBottomBlock(block, text);
+      if (KEYS[0].indexOf(word[i]) > -1) this.addTopBlock(block, text, value);
+      else if (KEYS[1].indexOf(word[i]) > -1) this.addMiddleBlock(block, text, value);
+      else if (KEYS[2].indexOf(word[i]) > -1) this.addBottomBlock(block, text, value);
     }
   }
-  addTopBlock(block, text) {
+  addTopBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.upperRow, SQUARE_W * (-9.5 + this.upperRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
     Phaser.Display.Align.In.Center(text, block);
 
-    this.upperRowBlocks.push({ block, text });
+    this.upperRowBlocks.push({ block, text, value });
+
+    this.upperRowCount.setText(this.upperRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
   }
-  addMiddleBlock(block, text) {
+  addMiddleBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.middleRow, SQUARE_W * (-9.5 + this.middleRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
     Phaser.Display.Align.In.Center(text, block);
 
-    this.middleRowBlocks.push({ block, text });
+    this.middleRowBlocks.push({ block, text, value });
+
+    this.middleRowCount.setText(this.middleRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
   }
-  addBottomBlock(block, text) {
+  addBottomBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.bottomRow, SQUARE_W * (-9.5 + this.bottomRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
     Phaser.Display.Align.In.Center(text, block);
 
-    this.bottomRowBlocks.push({ block, text });
+    this.bottomRowBlocks.push({ block, text, value });
+    this.bottomRowCount.setText(this.bottomRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
   }
 }
 
