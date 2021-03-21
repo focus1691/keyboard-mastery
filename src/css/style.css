@@ -2,3 +2,13 @@ body {
     margin: 0;
     background: 0;
 }
+
+@font-face {
+    font-family: "Paneuropa Bankette";
+    src: url("../assets/fonts/Paneuropa_Bankette.ttf");
+}
+
+@font-face {
+    font-family: "Paneuropa Freeway";
+    src: url("../assets/fonts/Paneuropa_Freeway.ttf");
+}
