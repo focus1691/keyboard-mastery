@@ -72,10 +72,14 @@ class playGame extends Phaser.Scene {
   }
   handleWordCorrect() {
     console.log(`${this.word} word exists`);
-    this.word = '';
+    this.letterBoard.constructBlocks(this.word);
+    this.clearWord();
   }
   handleWordError() {
     console.log(`${this.word} word doesn't exist`);
+    this.clearWord();
+  }
+  clearWord() {
     this.word = '';
   }
   update(time, delta) {
