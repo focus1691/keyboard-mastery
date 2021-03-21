@@ -67,6 +67,7 @@ class letterBoard extends Phaser.GameObjects.Container {
     this.upperRowBlocks.push({ block, text, value });
 
     this.upperRowCount.setText(this.upperRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    Phaser.Display.Align.In.Center(this.upperRowCount, this.upperRowNumber);
   }
   addMiddleBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.middleRow, SQUARE_W * (-9.5 + this.middleRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
@@ -75,6 +76,7 @@ class letterBoard extends Phaser.GameObjects.Container {
     this.middleRowBlocks.push({ block, text, value });
 
     this.middleRowCount.setText(this.middleRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    Phaser.Display.Align.In.Center(this.middleRowCount, this.middleRowNumber);
   }
   addBottomBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.bottomRow, SQUARE_W * (-9.5 + this.bottomRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
@@ -82,6 +84,7 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.bottomRowBlocks.push({ block, text, value });
     this.bottomRowCount.setText(this.bottomRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    Phaser.Display.Align.In.Center(this.bottomRowCount, this.bottomRowNumber);
   }
 }
 
