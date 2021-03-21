@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import preloader from './scenes/preloader';
 import playGame from './scenes/playGame';
 import './css/style.css';
 
@@ -24,7 +25,7 @@ const config = {
     mode: Phaser.DOM.FIT,
     autoCenter: Phaser.DOM.CENTER_BOTH,
   },
-  scene: [playGame],
+  scene: [preloader, playGame],
 };
 
 const game = new Phaser.Game(config);

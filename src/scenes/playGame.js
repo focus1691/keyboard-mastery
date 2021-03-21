@@ -5,57 +5,17 @@ import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { binarySearch } from '../utils/search';
-//* Images
-import backgroundImg from '../assets/images/background.png';
-import wordPanelImg from '../assets/images/word_panel.png';
-
-import keyboardContainer from '../assets/images/keyboard_container.png';
-import keyboardBackground from '../assets/images/keyboard_background.png';
-import keyboardOutline from '../assets/images/keyboard_outline.png';
-
-import letterBoardRow from '../assets/images/letterboard_row.png';
-import letterBoardNumber from '../assets/images/letterboard_number.png';
-
-//* Spritesheets
-import blocksSquares from '../assets/sprites/blocks_squares.png';
-import blocksSquaresJSON from '../assets/sprites/blocks_squares.json';
-import keyboard from '../assets/sprites/keyboard.png';
-import keyboardJSON from '../assets/sprites/keyboard.json';
-
 import { WIDTH, HEIGHT } from '..';
-//* Audio
-import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
 
 class playGame extends Phaser.Scene {
+  constructor() {
+    super('playGame');
+  }
   init() {
     this.accumMS = 0;
     this.hzMS = (1 / 60) * 1000;
     this.word = '';
     this.answerSubmitted = false;
-  }
-  preload() {
-    this.load.text('words', 'src/assets/words/en.txt');
-
-    this.load.image('background', backgroundImg);
-
-    this.load.image('word_panel', wordPanelImg);
-
-    //* Letterboard
-    this.load.image('letterboard_row', letterBoardRow);
-    this.load.image('letterboard_number', letterBoardNumber);
-
-    //* Keyboard
-    this.load.image('keyboard_container', keyboardContainer);
-    this.load.image('keyboard_background', keyboardBackground);
-    this.load.image('keyboard_outline', keyboardOutline);
-
-    //* Word Panel
-    this.load.image('word_panel', wordPanelImg);
-
-    this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
-    this.load.atlas('keyboard', keyboard, keyboardJSON);
-
-    this.load.audio('key_press', keyPressSound);
   }
   create() {
     this.sound.volume = 0.1;
