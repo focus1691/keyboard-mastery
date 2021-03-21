@@ -35,11 +35,11 @@ class letterBoard extends Phaser.GameObjects.Container {
     Phaser.Display.Align.To.RightCenter(this.bottomRowNumber, this.bottomRow, -1250, 0);
     Phaser.Display.Align.In.Center(this.bottomRowCount, this.bottomRowNumber);
 
-    this.addBlock();
+    this.testaddBlock();
 
     this.scene.add.existing(this);
   }
-  addBlock() {
+  testaddBlock() {
     for (let i = -9.5; i <= 9.5; i += 1) {
       const block = this.scene.make.image({
         x: 0,
@@ -56,6 +56,9 @@ class letterBoard extends Phaser.GameObjects.Container {
 
       this.blocks.push({ block, text });
     }
+  }
+  addBlock() {
+    
   }
 }
 
