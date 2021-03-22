@@ -110,6 +110,7 @@ class playGame extends Phaser.Scene {
         this.handleGameOver();
       }
     }
+    this.wordPanel.createBlock(this.word);
 
     if (this.letterBoard.isKeyStroke()) {
       // Update score
