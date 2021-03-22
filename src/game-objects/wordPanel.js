@@ -35,7 +35,7 @@ class wordPanel extends Phaser.GameObjects.Container {
     });
     Phaser.Display.Align.In.Center(this.wordText, this.input, -INPUT_W / 5, 0);
 
-    this.createBlock('mandate');
+    this.createBlock('too');
 
     this.scene.add.existing(this);
   }
@@ -64,6 +64,7 @@ class wordPanel extends Phaser.GameObjects.Container {
       text: word,
       style: { fontFamily: 'Paneuropa Bankette', fontSize: '4rem', strokeThickness: 1, color: '#fff' },
     });
+    tile.setDisplaySize(text.displayWidth * 2, tile.displayHeight);
 
     this.tiles.push({tile, text});
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
@@ -81,7 +82,7 @@ class wordPanel extends Phaser.GameObjects.Container {
 
     this.scene.tweens.add({
       targets: [text],
-      x: 50,
+      x: 200 - ((tile.displayWidth / 2) - (text.displayWidth / 2)),
       duration: 3000,
       ease: 'Power2',
       easeParams: [ 1.5, 0.5 ],
