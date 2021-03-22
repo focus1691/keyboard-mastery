@@ -29,6 +29,12 @@ class playGame extends Phaser.Scene {
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
+    //* Letter animations
+    this.createAnimation('destroy_green_letter', 'blocks_squares', 'green_square_00', 0, 5, '.png', false, 0, 10);
+    this.createAnimation('destroy_blue_letter', 'blocks_squares', 'blue_square_00', 0, 5, '.png', false, 0, 10);
+    this.createAnimation('destroy_yellow_letter', 'blocks_squares', 'yellow_square_00', 0, 5, '.png', false, 0, 10);
+    this.createAnimation('destroy_pink_letter', 'blocks_squares', 'pink_square_00', 0, 5, '.png', false, 0, 10);
+
     this.input.keyboard.on(
       'keydown',
       function (event) {
@@ -100,6 +106,20 @@ class playGame extends Phaser.Scene {
   }
   clearWord() {
     this.word = '';
+  }
+  createAnimation(key, name, prefix, start, end, suffix, yoyo, repeat, frameRate) {
+    this.anims.create({
+      key: key,
+      frames: this.anims.generateFrameNames(name, {
+        prefix,
+        start,
+        end,
+        suffix,
+      }),
+      frameRate,
+      yoyo,
+      repeat,
+    });
   }
   update(time, delta) {
     this.accumMS += delta;
