@@ -25,7 +25,7 @@ class wordPanel extends Phaser.GameObjects.Container {
     Phaser.Display.Align.In.BottomCenter(this.wordPanel, this.scene.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT));
 
     this.input = this.scene.make.image({ x: 0, y: 0, key: 'text_input', scale: { x: INPUT_SCALE_FACTOR_X, y: INPUT_SCALE_FACTOR_Y } });
-    Phaser.Display.Align.To.TopCenter(this.input, this.wordPanel, 0, -(INPUT_H / 1.5));
+    Phaser.Display.Align.To.TopCenter(this.input, this.wordPanel, 0, -INPUT_H + 10);
 
     this.wordText = this.scene.make.text({
       x: 0,
