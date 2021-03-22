@@ -68,6 +68,15 @@ class letterBoard extends Phaser.GameObjects.Container {
       text.destroy();
     }
   }
+  getTotalPoints() {
+    const upperTotal = this.upperRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr);
+    const midTotal = this.middleRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr);
+    const botttomTotal = this.bottomRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr);
+
+    const total = upperTotal + midTotal + botttomTotal;
+
+    return total;
+  }
   resetLetterCount() {
     this.upperRowCount.setText('0');
     this.middleRowCount.setText('0');

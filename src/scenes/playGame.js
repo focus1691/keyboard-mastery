@@ -5,7 +5,9 @@ import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { ALPHABET, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { binarySearch } from '../utils/search';
-import { WIDTH, HEIGHT } from '..';
+import { half } from '../utils/math';
+
+import { WIDTH, HEIGHT, assetsDPR } from '..';
 
 class playGame extends Phaser.Scene {
   constructor() {
@@ -16,11 +18,12 @@ class playGame extends Phaser.Scene {
     this.hzMS = (1 / 60) * 1000;
     this.word = '';
     this.processingAnswer = false;
+    this.score = 0;
   }
   create() {
     this.sound.volume = 0.1;
 
-    this.words = this.cache.text.get('words').split('\n').map((word) => word.trim());
+    this.wordList = this.cache.text.get('words').split('\n').map((word) => word.trim());
 
     this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
@@ -28,6 +31,15 @@ class playGame extends Phaser.Scene {
     this.letterBoard = new LetterBoard(this, { x: 0, y: 0 });
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
+
+    this.scoreText = this.make.text({
+      x: 0,
+      y: 0,
+      text: `${this.score}`,
+      style: { fontFamily: 'Paneuropa Freeway', fontSize: '7rem', strokeThickness: 3, color: '#000' },
+    });
+    this.scoreZone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH - 20, HEIGHT - 20);
+    Phaser.Display.Align.In.TopRight(this.scoreText, this.scoreZone);
 
     //* Letter animations
     this.createAnimation('destroy_green_letter', 'blocks_squares', 'green_square_00', 0, 5, '.png', false, 0, 10);
@@ -69,7 +81,7 @@ class playGame extends Phaser.Scene {
     );
   }
   submitWord() {
-    if (binarySearch(this.words, this.word) > -1) {
+    if (binarySearch(this.wordList, this.word) > -1) {
       this.handleWordCorrect();
     } else {
       this.handleWordError();
@@ -90,6 +102,13 @@ class playGame extends Phaser.Scene {
     }
 
     if (this.letterBoard.isKeyStroke()) {
+      // Update score
+      const points = this.letterBoard.getTotalPoints();
+      this.score += points;
+      this.scoreText.setText(this.score);
+      Phaser.Display.Align.In.TopRight(this.scoreText, this.scoreZone);
+
+      // Destroy blocks
       this.letterBoard.destroyBlocks();
       this.letterBoard.resetLetterCount();
       this.letterBoard.recenterLetterCounters();
