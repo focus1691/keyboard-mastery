@@ -23,7 +23,10 @@ class playGame extends Phaser.Scene {
   create() {
     this.sound.volume = 0.1;
 
-    this.wordList = this.cache.text.get('words').split('\n').map((word) => word.trim());
+    this.wordList = this.cache.text
+      .get('words')
+      .split('\n')
+      .map((word) => word.trim());
 
     this.make.image({ key: 'background', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
@@ -55,9 +58,11 @@ class playGame extends Phaser.Scene {
         let key = event.key.toLowerCase();
 
         if (ALPHABET.includes(key)) {
-          this.word += key;
-          this.keyboard.keys[`${key}-key`].setFrame(`${key}_key_pressed.png`);
-          this.sound.play('key_press');
+          if (this.word.length < MAX_LETTERS) {
+            this.word += key;
+            this.keyboard.keys[`${key}-key`].setFrame(`${key}_key_pressed.png`);
+            this.sound.play('key_press');
+          }
           this.updateWordDisplay();
         } else if (key === 'enter') {
           this.processingAnswer = true;
@@ -83,9 +88,7 @@ class playGame extends Phaser.Scene {
     );
   }
   updateWordDisplay() {
-    if (this.word.length < MAX_LETTERS) {
-      this.wordPanel.setWord(this.word);
-    }
+    this.wordPanel.setWord(this.word);
   }
   submitWord() {
     if (binarySearch(this.wordList, this.word) > -1) {
@@ -127,9 +130,7 @@ class playGame extends Phaser.Scene {
     console.log(`${this.word} word doesn't exist`);
     this.clearWord();
   }
-  handleGameOver() {
-
-  }
+  handleGameOver() {}
   clearWord() {
     this.word = '';
     this.updateWordDisplay();

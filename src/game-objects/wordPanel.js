@@ -55,6 +55,23 @@ class wordPanel extends Phaser.GameObjects.Container {
       }
     });
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, -(BLOCK_W * SCALE_FACTOR_X), -(BLOCK_H));
+
+
+    const tile2 = this.scene.make.image({
+      x: 0,
+      y: 0,
+      key: 'blocks_squares',
+      frame: 'green_block.png',
+      scale: {
+        x: SCALE_FACTOR_X / 2,
+        y: SCALE_FACTOR_Y / 2,
+      },
+      origin: {
+        x: ORIGIN_X,
+        y: ORIGIN_Y,
+      }
+    });
+    Phaser.Display.Align.In.BottomCenter(tile2, this.wordPanel, 0, -(BLOCK_H));
   }
 }
 
