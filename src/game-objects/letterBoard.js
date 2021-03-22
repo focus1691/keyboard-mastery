@@ -55,9 +55,9 @@ class letterBoard extends Phaser.GameObjects.Container {
       });
       const text = this.scene.add.text(0, 0, letter, { fontFamily: 'Paneuropa Freeway', fontSize: 48, color: '#000' });
 
-      if (KEYS[0].indexOf(word[i]) > -1) this.addTopBlock(block, text, value);
-      else if (KEYS[1].indexOf(word[i]) > -1) this.addMiddleBlock(block, text, value);
-      else if (KEYS[2].indexOf(word[i]) > -1) this.addBottomBlock(block, text, value);
+      if (KEYS[0].indexOf(letter) > -1) this.addTopBlock(block, text, value);
+      else if (KEYS[1].indexOf(letter) > -1) this.addMiddleBlock(block, text, value);
+      else if (KEYS[2].indexOf(letter) > -1) this.addBottomBlock(block, text, value);
     }
   }
   addTopBlock(block, text, value) {
