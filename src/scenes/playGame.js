@@ -72,12 +72,31 @@ class playGame extends Phaser.Scene {
   }
   handleWordCorrect() {
     console.log(`${this.word} word exists`);
-    this.letterBoard.constructBlocks(this.word);
+
+    for (let i = 0; i < this.word.length; i++) {
+      const letter = this.word[i];
+      if (!this.letterBoard.isRowFull(letter)) {
+        this.letterBoard.constructBlock(letter);
+      } else {
+        //! Game Over
+        this.handleGameOver();
+      }
+    }
+
+    if (this.letterBoard.isKeyStroke()) {
+      this.letterBoard.destroyBlocks();
+      this.letterBoard.resetLetterCount();
+      this.letterBoard.recenterLetterCounters();
+    }
+
     this.clearWord();
   }
   handleWordError() {
     console.log(`${this.word} word doesn't exist`);
     this.clearWord();
+  }
+  handleGameOver() {
+
   }
   clearWord() {
     this.word = '';

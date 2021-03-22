@@ -42,23 +42,56 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.scene.add.existing(this);
   }
-  constructBlocks(word) {
-    for (let i = 0; i < word.length; i++) {
-      const letter = word[i];
-      const { colour, value } = getBlockData(letter);
-      const block = this.scene.make.image({
-        x: 0,
-        y: 0,
-        key: 'blocks_squares',
-        frame: `${colour}_square_000.png`,
-        scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
-      });
-      const text = this.scene.add.text(0, 0, letter, { fontFamily: 'Paneuropa Freeway', fontSize: 48, color: '#000' });
-
-      if (KEYS[0].indexOf(letter) > -1) this.addTopBlock(block, text, value);
-      else if (KEYS[1].indexOf(letter) > -1) this.addMiddleBlock(block, text, value);
-      else if (KEYS[2].indexOf(letter) > -1) this.addBottomBlock(block, text, value);
+  isKeyStroke() {
+    return this.upperRowBlocks.length === this.middleRowBlocks.length && this.upperRowBlocks.length === this.bottomRowBlocks.length;
+  }
+  isRowFull(letter) {
+    if (KEYS[0].indexOf(letter) > -1) return this.upperRowBlocks.length >= 20;
+    else if (KEYS[1].indexOf(letter) > -1) return this.middleRowBlocks.length >= 20;
+    else if (KEYS[2].indexOf(letter) > -1) return this.bottomRowBlocks.length >= 20;
+    return false;
+  }
+  destroyBlocks() {
+    while (this.upperRowBlocks.length > 0) {
+      let { block, text } = this.upperRowBlocks.shift();
+      block.destroy();
+      text.destroy();
     }
+    while (this.middleRowBlocks.length > 0) {
+      let { block, text } = this.middleRowBlocks.shift();
+      block.destroy();
+      text.destroy();
+    }
+    while (this.bottomRowBlocks.length > 0) {
+      let { block, text } = this.bottomRowBlocks.shift();
+      block.destroy();
+      text.destroy();
+    }
+  }
+  resetLetterCount() {
+    this.upperRowCount.setText('0');
+    this.middleRowCount.setText('0');
+    this.bottomRowCount.setText('0');
+  }
+  recenterLetterCounters() {
+    Phaser.Display.Align.In.Center(this.upperRowCount, this.upperRowNumber);
+    Phaser.Display.Align.In.Center(this.middleRowCount, this.middleRowNumber);
+    Phaser.Display.Align.In.Center(this.bottomRowCount, this.bottomRowNumber);
+  }
+  constructBlock(letter) {
+    const { colour, value } = getBlockData(letter);
+    const block = this.scene.make.image({
+      x: 0,
+      y: 0,
+      key: 'blocks_squares',
+      frame: `${colour}_square_000.png`,
+      scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
+    });
+    const text = this.scene.add.text(0, 0, letter, { fontFamily: 'Paneuropa Freeway', fontSize: 48, color: '#000' });
+
+    if (KEYS[0].indexOf(letter) > -1) this.addTopBlock(block, text, value);
+    else if (KEYS[1].indexOf(letter) > -1) this.addMiddleBlock(block, text, value);
+    else if (KEYS[2].indexOf(letter) > -1) this.addBottomBlock(block, text, value);
   }
   addTopBlock(block, text, value) {
     Phaser.Display.Align.In.Center(block, this.upperRow, SQUARE_W * (-9.5 + this.upperRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
@@ -66,7 +99,7 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.upperRowBlocks.push({ block, text, value });
 
-    this.upperRowCount.setText(this.upperRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    this.upperRowCount.setText(this.upperRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr));
     Phaser.Display.Align.In.Center(this.upperRowCount, this.upperRowNumber);
   }
   addMiddleBlock(block, text, value) {
@@ -75,7 +108,7 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.middleRowBlocks.push({ block, text, value });
 
-    this.middleRowCount.setText(this.middleRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    this.middleRowCount.setText(this.middleRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr));
     Phaser.Display.Align.In.Center(this.middleRowCount, this.middleRowNumber);
   }
   addBottomBlock(block, text, value) {
@@ -83,7 +116,7 @@ class letterBoard extends Phaser.GameObjects.Container {
     Phaser.Display.Align.In.Center(text, block);
 
     this.bottomRowBlocks.push({ block, text, value });
-    this.bottomRowCount.setText(this.bottomRowBlocks.map(({value}) => value).reduce((prev, curr) => prev + curr));
+    this.bottomRowCount.setText(this.bottomRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr));
     Phaser.Display.Align.In.Center(this.bottomRowCount, this.bottomRowNumber);
   }
 }
