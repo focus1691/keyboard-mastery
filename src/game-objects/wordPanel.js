@@ -1,5 +1,5 @@
 import { WIDTH, HEIGHT } from '../';
-import { H, ORIGIN_X, ORIGIN_Y, SCALE_FACTOR_X, SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
+import { BLOCK_W, BLOCK_H, ORIGIN_X, ORIGIN_Y, SCALE_FACTOR_X, SCALE_FACTOR_Y, INPUT_W, INPUT_H, INPUT_SCALE_FACTOR_X, INPUT_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
 import { half } from '../utils/math';
 
 class wordPanel extends Phaser.GameObjects.Container {
@@ -23,7 +23,21 @@ class wordPanel extends Phaser.GameObjects.Container {
     Phaser.Display.Align.In.BottomCenter(this.wordPanel, this.scene.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT));
     this.createBlock();
 
+    this.input = this.scene.make.image({ x: 0, y: 0, key: 'text_input', scale: { x: INPUT_SCALE_FACTOR_X, y: INPUT_SCALE_FACTOR_Y } });
+    Phaser.Display.Align.To.TopCenter(this.input, this.wordPanel, 0, -(INPUT_H / 1.5));
+
+    this.wordText = this.scene.make.text({
+      x: 0,
+      y: 0,
+      text: '',
+      style: { fontFamily: 'Paneuropa Freeway', fontSize: '4rem', strokeThickness: 3, color: '#000' },
+    });
+    Phaser.Display.Align.In.Center(this.wordText, this.input, -INPUT_W / 5, 0);
+
     this.scene.add.existing(this);
+  }
+  setWord(word) {
+    this.wordText.setText(word);
   }
   createBlock() {
     const tile = this.scene.make.image({
@@ -37,10 +51,10 @@ class wordPanel extends Phaser.GameObjects.Container {
       },
       origin: {
         x: ORIGIN_X,
-        y: 0.5
+        y: ORIGIN_Y,
       }
     });
-    Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel);
+    Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, -(BLOCK_W * SCALE_FACTOR_X), -(BLOCK_H));
   }
 }
 

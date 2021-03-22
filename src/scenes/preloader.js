@@ -6,6 +6,8 @@ import keyboardContainer from '../assets/images/keyboard_container.png';
 import keyboardBackground from '../assets/images/keyboard_background.png';
 import keyboardOutline from '../assets/images/keyboard_outline.png';
 
+import textInput from '../assets/images/text_input.png';
+
 import letterBoardRow from '../assets/images/letterboard_row.png';
 import letterBoardNumber from '../assets/images/letterboard_number.png';
 
@@ -63,6 +65,9 @@ export default class preloaderScene extends Phaser.Scene {
     this.load.image('keyboard_container', keyboardContainer);
     this.load.image('keyboard_background', keyboardBackground);
     this.load.image('keyboard_outline', keyboardOutline);
+
+    //* Text input
+    this.load.image('text_input', textInput);
 
     //* Word Panel
     this.load.image('word_panel', wordPanelImg);

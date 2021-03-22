@@ -1,6 +1,6 @@
 import { WIDTH, HEIGHT } from '../';
 import { KEYS, KEY_W, KEY_H, KEYBOARD_H, KEY_X_SPACE, KEY_Y_SPACE, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
-import { H as WORD_PANEL_H, SCALE_FACTOR_Y as WORD_PANEL_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
+import { H as WORD_PANEL_H, SCALE_FACTOR_Y as WORD_PANEL_SCALE_FACTOR_Y, INPUT_H, INPUT_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
 import { half } from '../utils/math';
 
 class Keyboard extends Phaser.GameObjects.Container {
@@ -9,7 +9,7 @@ class Keyboard extends Phaser.GameObjects.Container {
 
     this.keys = {};
 
-    const offsetY = -(WORD_PANEL_H * WORD_PANEL_SCALE_FACTOR_Y / 2);
+    const offsetY = -(WORD_PANEL_H * WORD_PANEL_SCALE_FACTOR_Y / 2 ) + -(INPUT_H * INPUT_SCALE_FACTOR_Y / 2);
     let x = half(WIDTH) - (KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR * 4 - half((KEY_W + KEY_X_SPACE) * KEY_SCALE_FACTOR);
     let y = config.y - (KEY_H + KEY_Y_SPACE) * KEY_SCALE_FACTOR + offsetY;
 

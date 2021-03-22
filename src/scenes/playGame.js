@@ -3,7 +3,7 @@ import Keyboard from '../game-objects/keyboard';
 import LetterBoard from '../game-objects/letterBoard';
 import WordPanel from '../game-objects/wordPanel';
 //* Utils
-import { ALPHABET, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
+import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { binarySearch } from '../utils/search';
 import { half } from '../utils/math';
 
@@ -58,11 +58,13 @@ class playGame extends Phaser.Scene {
           this.word += key;
           this.keyboard.keys[`${key}-key`].setFrame(`${key}_key_pressed.png`);
           this.sound.play('key_press');
+          this.updateWordDisplay();
         } else if (key === 'enter') {
           this.processingAnswer = true;
           this.submitWord();
         } else if (key === 'backspace') {
           this.word = this.word.substring(0, this.word.length - 1);
+          this.updateWordDisplay();
         }
       },
       this
@@ -79,6 +81,11 @@ class playGame extends Phaser.Scene {
       },
       this
     );
+  }
+  updateWordDisplay() {
+    if (this.word.length < MAX_LETTERS) {
+      this.wordPanel.setWord(this.word);
+    }
   }
   submitWord() {
     if (binarySearch(this.wordList, this.word) > -1) {
@@ -125,6 +132,7 @@ class playGame extends Phaser.Scene {
   }
   clearWord() {
     this.word = '';
+    this.updateWordDisplay();
   }
   createAnimation(key, name, prefix, start, end, suffix, yoyo, repeat, frameRate) {
     this.anims.create({

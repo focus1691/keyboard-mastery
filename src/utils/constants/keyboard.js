@@ -14,3 +14,6 @@ export const KEY_Y_SPACE = 40;
 export const KEY_X_SPACE = 40;
 export const ROWS = 5;
 export const COLS = 13;
+
+const LARGEST_WORD = 28;
+export const MAX_LETTERS = LARGEST_WORD + 2;
