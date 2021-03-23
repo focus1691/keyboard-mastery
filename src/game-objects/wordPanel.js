@@ -56,7 +56,7 @@ class wordPanel extends Phaser.GameObjects.Container {
   setWord(word) {
     this.wordText.setText(word);
   }
-  createBlock(word) {
+  createWordBlock(word) {
     const tile = this.scene.make.image({
       x: 0,
       y: 0,
@@ -113,7 +113,7 @@ class wordPanel extends Phaser.GameObjects.Container {
       onComplete: function () {
         this.activeTweens -= 1;
         if (this.activeTweens <= 0) {
-          this.scene.onWordTweenOver();         
+          this.scene.onWordTweenOver();
         }
       }.bind(this),
     });
@@ -134,6 +134,13 @@ class wordPanel extends Phaser.GameObjects.Container {
     });
 
     this.activeTweens += 3;
+  }
+  destroyWordBlocks() {
+    while (this.tiles.length > 0) {
+      const { text, tile } = this.tiles.shift();
+      text.destroy();
+      tile.destroy();
+    }
   }
 }
 

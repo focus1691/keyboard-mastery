@@ -107,7 +107,7 @@ class playGame extends Phaser.Scene {
         this.handleGameOver();
       }
     }
-    this.wordPanel.createBlock(this.word);
+    this.wordPanel.createWordBlock(this.word);
 
     this.clearWord();
   }
@@ -126,6 +126,7 @@ class playGame extends Phaser.Scene {
 
       // Destroy blocks
       this.letterBoard.destroyBlocks();
+      this.wordPanel.destroyWordBlocks();
       this.letterBoard.resetLetterCount();
       this.letterBoard.recenterLetterCounters();
     }
