@@ -43,17 +43,6 @@ class wordPanel extends Phaser.GameObjects.Container {
     this.wordText.setText(word);
   }
   createBlock(word) {
-    let offset = 0;
-    if (this.tiles.length > 0) {
-      const { displayOriginX, displayWidth } = this.tiles[this.tiles.length -1].tile;
-      let offset = this.tiles.map(({tile}) => Number(tile.displayWidth)).reduce((prev, next) => prev + next);
-      console.log(`offset ${offset}`);
-      offset = offset + displayOriginX + 150;
-      console.log(`offset 2 ${offset}`);
-      // offset = displayWidth + displayOriginX - 150;
-      console.log(offset, this.tiles[this.tiles.length -1].tile);
-    }
-
     const tile = this.scene.make.image({
       x: 0,
       y: 0,
@@ -71,6 +60,12 @@ class wordPanel extends Phaser.GameObjects.Container {
       style: { fontFamily: 'Paneuropa Bankette', fontSize: '4rem', strokeThickness: 1, color: '#fff' },
     });
     tile.setDisplaySize(text.displayWidth * 2, tile.displayHeight);
+
+    let offset = 0;
+    if (this.tiles.length > 0) {
+      const { displayWidth, x } = this.tiles[this.tiles.length -1].tile;
+      offset = x + tile.displayWidth - ((tile.displayWidth - displayWidth) / 2);
+    }
 
     this.tiles.push({tile, text});
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
