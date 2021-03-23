@@ -20,6 +20,8 @@ import keyboardJSON from '../assets/sprites/keyboard.json';
 //* Audio
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
 
+const isDev = false;
+
 export default class preloaderScene extends Phaser.Scene {
   constructor() {
     super('preloaderScene');
@@ -51,7 +53,7 @@ export default class preloaderScene extends Phaser.Scene {
     this.newGraphics.fillGradientStyle(0x8b96d6, 0x281979, 0x741998, 0x8b96d6, 1);
     this.newGraphics.fillRectShape(progressBarFill);
 
-    this.load.text('words', 'src/assets/words/en.txt');
+    this.load.text('words', `${isDev ? 'src/assets/words/' : ''}en.txt`);
 
     this.load.image('background', backgroundImg);
 
