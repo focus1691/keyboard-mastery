@@ -80,7 +80,6 @@ class wordPanel extends Phaser.GameObjects.Container {
       const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
       offset = BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
     } else {
-      console.log(this.wordPanel);
       offset = BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
     }
 

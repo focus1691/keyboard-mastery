@@ -98,8 +98,6 @@ class playGame extends Phaser.Scene {
     }
   }
   handleWordCorrect() {
-    console.log(`${this.word} word exists`);
-
     for (let i = 0; i < this.word.length; i++) {
       const letter = this.word[i];
       if (!this.letterBoard.isRowFull(letter)) {
@@ -127,7 +125,6 @@ class playGame extends Phaser.Scene {
     this.clearWord();
   }
   handleWordError() {
-    console.log(`${this.word} word doesn't exist`);
     this.clearWord();
     this.processingAnswer = false;
   }
