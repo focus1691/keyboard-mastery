@@ -1,5 +1,5 @@
 import { WIDTH, HEIGHT } from '../';
-import { BLOCK_W, BLOCK_H, BLOCK_SCALE_X, BLOCK_SCALE_Y, ORIGIN_X, ORIGIN_Y, SCALE_FACTOR_X, SCALE_FACTOR_Y, INPUT_W, INPUT_H, INPUT_SCALE_FACTOR_X, INPUT_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
+import { BLOCK_SCALE_X, BLOCK_SCALE_Y, BLOCK_SPACE, ORIGIN_X, ORIGIN_Y, SCALE_FACTOR_X, SCALE_FACTOR_Y, INPUT_W, INPUT_H, INPUT_SCALE_FACTOR_X, INPUT_SCALE_FACTOR_Y } from '../utils/constants/wordPanel';
 import { half } from '../utils/math';
 
 class wordPanel extends Phaser.GameObjects.Container {
@@ -78,10 +78,10 @@ class wordPanel extends Phaser.GameObjects.Container {
     let offset = 0;
     if (this.tiles.length > 0) {
       const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
-      offset = x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
+      offset = BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
     } else {
       console.log(this.wordPanel);
-      offset = 0 + tile.displayWidth - tile.displayWidth / 2;
+      offset = BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
     }
 
     this.tiles.push({ tile, text });
