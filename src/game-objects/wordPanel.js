@@ -45,7 +45,13 @@ class wordPanel extends Phaser.GameObjects.Container {
   createBlock(word) {
     let offset = 0;
     if (this.tiles.length > 0) {
-      offset = this.tiles[this.tiles.length -1].tile.x;
+      const { displayOriginX, displayWidth } = this.tiles[this.tiles.length -1].tile;
+      let offset = this.tiles.map(({tile}) => Number(tile.displayWidth)).reduce((prev, next) => prev + next);
+      console.log(`offset ${offset}`);
+      offset = offset + displayOriginX + 150;
+      console.log(`offset 2 ${offset}`);
+      // offset = displayWidth + displayOriginX - 150;
+      console.log(offset, this.tiles[this.tiles.length -1].tile);
     }
 
     const tile = this.scene.make.image({
@@ -69,20 +75,18 @@ class wordPanel extends Phaser.GameObjects.Container {
     this.tiles.push({tile, text});
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
     Phaser.Display.Align.In.Center(text, tile, 0, 0);
-    console.table(this.wordPanel.displayWidth, this.tiles[this.tiles.length -1].tile.x, this.tiles[this.tiles.length -1].tile.displayWidth);
 
     this.scene.tweens.add({
       targets: [tile],
-      x: 200,
+      x: offset > 0 ? offset : 150,
       duration: 3000,
       ease: 'Power2',
       easeParams: [ 1.5, 0.5 ],
     });
-    console.log(text.width);
 
     this.scene.tweens.add({
       targets: [text],
-      x: 200 - ((tile.displayWidth / 2) - (text.displayWidth / 2)),
+      x: (offset > 0 ? offset : 150) - ((tile.displayWidth / 2) - (text.displayWidth / 2)),
       duration: 3000,
       ease: 'Power2',
       easeParams: [ 1.5, 0.5 ],
