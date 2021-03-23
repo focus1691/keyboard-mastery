@@ -109,6 +109,14 @@ class playGame extends Phaser.Scene {
     }
     this.wordPanel.createBlock(this.word);
 
+    this.clearWord();
+  }
+  onWordTweenOver() {
+    this.checkKeyStroke();
+    this.processingAnswer = false; 
+  }
+  // A Key Stroke = 3 rows have an equal amount of blocks
+  checkKeyStroke() {
     if (this.letterBoard.isKeyStroke()) {
       // Update score
       const points = this.letterBoard.getTotalPoints();
@@ -121,8 +129,6 @@ class playGame extends Phaser.Scene {
       this.letterBoard.resetLetterCount();
       this.letterBoard.recenterLetterCounters();
     }
-
-    this.clearWord();
   }
   handleWordError() {
     this.clearWord();

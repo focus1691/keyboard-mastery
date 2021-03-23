@@ -98,7 +98,9 @@ class wordPanel extends Phaser.GameObjects.Container {
       easeParams: [1.5, 0.5],
       onComplete: function () {
         this.activeTweens -= 1;
-        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+        if (this.activeTweens <= 0) {
+          this.scene.onWordTweenOver();
+        }
       }.bind(this),
     });
 
@@ -110,7 +112,9 @@ class wordPanel extends Phaser.GameObjects.Container {
       easeParams: [1.5, 0.5],
       onComplete: function () {
         this.activeTweens -= 1;
-        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+        if (this.activeTweens <= 0) {
+          this.scene.onWordTweenOver();         
+        }
       }.bind(this),
     });
 
@@ -123,7 +127,9 @@ class wordPanel extends Phaser.GameObjects.Container {
       onComplete: function () {
         this.blockTail.setVisible(false);
         this.activeTweens -= 1;
-        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+        if (this.activeTweens <= 0) {
+          this.scene.onWordTweenOver();
+        }
       }.bind(this),
     });
 
