@@ -65,7 +65,6 @@ class playGame extends Phaser.Scene {
           }
           this.updateWordDisplay();
         } else if (key === 'enter') {
-          this.processingAnswer = true;
           this.submitWord();
         } else if (key === 'backspace') {
           this.word = this.word.substring(0, this.word.length - 1);
@@ -96,7 +95,6 @@ class playGame extends Phaser.Scene {
     } else {
       this.handleWordError();
     }
-    this.processingAnswer = false;
   }
   handleWordCorrect() {
     console.log(`${this.word} word exists`);
@@ -130,6 +128,7 @@ class playGame extends Phaser.Scene {
   handleWordError() {
     console.log(`${this.word} word doesn't exist`);
     this.clearWord();
+    this.processingAnswer = false;
   }
   handleGameOver() {}
   clearWord() {

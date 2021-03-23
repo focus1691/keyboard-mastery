@@ -6,6 +6,9 @@ class wordPanel extends Phaser.GameObjects.Container {
   constructor(scene, config) {
     super(scene, config.x, config.y);
 
+    this.activeTweens = 0;
+
+    //* Word panel is the container for the word blocks
     this.wordPanel = this.scene.make.image({
       x: 0,
       y: 0,
@@ -17,10 +20,23 @@ class wordPanel extends Phaser.GameObjects.Container {
       origin: {
         x: ORIGIN_X,
         y: ORIGIN_Y,
-      }
+      },
     });
 
     this.tiles = [];
+
+    //* Block Tail animation
+    this.blockTail = this.scene.make.sprite({
+      x: 0,
+      y: 0,
+      key: 'blocks_squares',
+      frame: 'block_tail.png',
+      scale: {
+        x: BLOCK_SCALE_X,
+        y: BLOCK_SCALE_Y,
+      },
+    });
+    this.blockTail.setVisible(false);
 
     Phaser.Display.Align.In.BottomCenter(this.wordPanel, this.scene.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT));
 
@@ -34,8 +50,6 @@ class wordPanel extends Phaser.GameObjects.Container {
       style: { fontFamily: 'Paneuropa Freeway', fontSize: '4rem', strokeThickness: 3, color: '#000' },
     });
     Phaser.Display.Align.In.Center(this.wordText, this.input, -INPUT_W / 5, 0);
-
-    this.createBlock('too');
 
     this.scene.add.existing(this);
   }
@@ -63,29 +77,58 @@ class wordPanel extends Phaser.GameObjects.Container {
 
     let offset = 0;
     if (this.tiles.length > 0) {
-      const { displayWidth, x } = this.tiles[this.tiles.length -1].tile;
-      offset = x + tile.displayWidth - ((tile.displayWidth - displayWidth) / 2);
+      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
+      offset = x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
+    } else {
+      console.log(this.wordPanel);
+      offset = 0 + tile.displayWidth - tile.displayWidth / 2;
     }
 
-    this.tiles.push({tile, text});
+    this.tiles.push({ tile, text });
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
+    Phaser.Display.Align.In.Center(this.blockTail, tile);
     Phaser.Display.Align.In.Center(text, tile, 0, 0);
 
+    this.blockTail.setVisible(true);
+
     this.scene.tweens.add({
-      targets: [tile],
-      x: offset > 0 ? offset : 150,
-      duration: 3000,
+      targets: [tile, this.blockTail],
+      x: offset,
+      duration: 2500,
       ease: 'Power2',
-      easeParams: [ 1.5, 0.5 ],
+      easeParams: [1.5, 0.5],
+      onComplete: function () {
+        this.activeTweens -= 1;
+        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+      }.bind(this),
     });
 
     this.scene.tweens.add({
       targets: [text],
-      x: (offset > 0 ? offset : 150) - ((tile.displayWidth / 2) - (text.displayWidth / 2)),
-      duration: 3000,
+      x: offset - (tile.displayWidth / 2 - text.displayWidth / 2),
+      duration: 2500,
       ease: 'Power2',
-      easeParams: [ 1.5, 0.5 ],
+      easeParams: [1.5, 0.5],
+      onComplete: function () {
+        this.activeTweens -= 1;
+        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+      }.bind(this),
     });
+
+    this.scene.tweens.add({
+      targets: [this.blockTail],
+      x: offset,
+      duration: 3500,
+      ease: 'Power2',
+      easeParams: [1.5, 0.5],
+      onComplete: function () {
+        this.blockTail.setVisible(false);
+        this.activeTweens -= 1;
+        if (this.activeTweens <= 0) this.scene.processingAnswer = false;
+      }.bind(this),
+    });
+
+    this.activeTweens += 3;
   }
 }
 
