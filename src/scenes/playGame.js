@@ -90,6 +90,7 @@ class playGame extends Phaser.Scene {
     this.wordPanel.setWord(this.word);
   }
   submitWord() {
+    this.processingAnswer = true;
     if (binarySearch(this.wordList, this.word) > -1) {
       this.handleWordCorrect();
     } else {
