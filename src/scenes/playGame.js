@@ -5,6 +5,7 @@ import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { binarySearch } from '../utils/search';
+import { isPreviousWordUsed } from '../utils/words';
 import { half } from '../utils/math';
 
 import { WIDTH, HEIGHT } from '..';
@@ -17,6 +18,7 @@ class playGame extends Phaser.Scene {
     this.accumMS = 0;
     this.hzMS = (1 / 60) * 1000;
     this.word = '';
+    this.usedWords = [];
     this.processingAnswer = false;
     this.score = 0;
   }
@@ -96,7 +98,7 @@ class playGame extends Phaser.Scene {
   }
   submitWord() {
     this.processingAnswer = true;
-    if (binarySearch(this.wordList, this.word) > -1) {
+    if (!isPreviousWordUsed(this.usedWords, this.word) && binarySearch(this.wordList, this.word) > -1) {
       this.handleWordCorrect();
     } else {
       this.handleWordError();
@@ -113,12 +115,12 @@ class playGame extends Phaser.Scene {
       }
     }
     this.wordPanel.createWordBlock(this.word);
-
-    this.clearWord();
   }
   onWordTweenOver() {
     this.checkKeyStroke();
-    this.processingAnswer = false; 
+    this.processingAnswer = false;
+    this.addUsedWord(this.word);
+    this.clearWord();
   }
   // A Key Stroke = 3 rows have an equal amount of blocks
   checkKeyStroke() {
@@ -146,6 +148,12 @@ class playGame extends Phaser.Scene {
   clearWord() {
     this.word = '';
     this.updateWordDisplay();
+  }
+  addUsedWord(word) {
+    this.usedWords.push(word);
+    if (this.usedWords.length > 20) {
+      this.usedWords.shift();
+    }
   }
   createAnimation(key, name, prefix, start, end, suffix, yoyo, repeat, frameRate) {
     this.anims.create({

@@ -89,6 +89,11 @@ class wordPanel extends Phaser.GameObjects.Container {
     Phaser.Display.Align.In.Center(text, tile, 0, 0);
 
     this.blockTail.setVisible(true);
+    console.log(offset, this.wordPanel.displayWidth, WIDTH);
+
+    if (offset >= WIDTH) {
+      this.destroyWordBlocksAt();
+    }
 
     this.scene.tweens.add({
       targets: [tile, this.blockTail],
@@ -136,6 +141,11 @@ class wordPanel extends Phaser.GameObjects.Container {
     this.scene.sound.play('word_slide');
 
     this.activeTweens += 3;
+  }
+  destroyWordBlocksAt() {
+    const { text, tile } = this.tiles.shift();
+    text.destroy();
+    tile.destroy();
   }
   destroyWordBlocks() {
     while (this.tiles.length > 0) {
