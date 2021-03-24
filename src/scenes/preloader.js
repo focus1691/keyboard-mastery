@@ -26,7 +26,6 @@ export default class preloaderScene extends Phaser.Scene {
   }
   preload() {
     this.cameras.main.setBackgroundColor('#381889');
-    console.log(NODE_ENV);
 
     const W = this.game.config.width;
     const H = this.game.config.height;
