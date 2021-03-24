@@ -18,7 +18,10 @@ import keyboard from '../assets/sprites/keyboard.png';
 import keyboardJSON from '../assets/sprites/keyboard.json';
 
 //* Audio
+import glidingMusic from '../assets/audio/music_zapsplat_gliding_136.mp3';
+import sliderMovementSound from '../assets/audio/audio_mangler_tek_science_fiction_machine_burst_slider_movement_175.mp3';
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
+import objectObliterateSound from '../assets/audio/science_fiction_machine_object_obliterate.mp3';
 
 export default class preloaderScene extends Phaser.Scene {
   constructor() {
@@ -75,7 +78,10 @@ export default class preloaderScene extends Phaser.Scene {
     this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
 
+    this.load.audio('theme_song', glidingMusic);
     this.load.audio('key_press', keyPressSound);
+    this.load.audio('word_slide', sliderMovementSound);
+    this.load.audio('blocks_destroyed', objectObliterateSound);
 
     this.load.on('progress', this.updateBar, this);
     this.load.on('complete', this.complete, this);

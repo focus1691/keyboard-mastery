@@ -133,6 +133,8 @@ class wordPanel extends Phaser.GameObjects.Container {
       }.bind(this),
     });
 
+    this.scene.sound.play('word_slide');
+
     this.activeTweens += 3;
   }
   destroyWordBlocks() {

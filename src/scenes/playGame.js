@@ -7,7 +7,7 @@ import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/co
 import { binarySearch } from '../utils/search';
 import { half } from '../utils/math';
 
-import { WIDTH, HEIGHT, assetsDPR } from '..';
+import { WIDTH, HEIGHT } from '..';
 
 class playGame extends Phaser.Scene {
   constructor() {
@@ -21,8 +21,6 @@ class playGame extends Phaser.Scene {
     this.score = 0;
   }
   create() {
-    this.sound.volume = 0.1;
-
     this.wordList = this.cache.text
       .get('words')
       .split('\n')
@@ -49,6 +47,13 @@ class playGame extends Phaser.Scene {
     this.createAnimation('destroy_blue_letter', 'blocks_squares', 'blue_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_yellow_letter', 'blocks_squares', 'yellow_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_pink_letter', 'blocks_squares', 'pink_square_00', 0, 5, '.png', false, 0, 10);
+
+    //* Audio
+    this.sound.add('theme_song');
+    this.sound.volume = 0.2;
+    this.sound.play('theme_song', {
+      loop: true,
+    });
 
     this.input.keyboard.on(
       'keydown',
@@ -129,6 +134,8 @@ class playGame extends Phaser.Scene {
       this.wordPanel.destroyWordBlocks();
       this.letterBoard.resetLetterCount();
       this.letterBoard.recenterLetterCounters();
+    
+      this.sound.play('blocks_destroyed');
     }
   }
   handleWordError() {
