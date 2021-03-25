@@ -116,6 +116,16 @@ class playGame extends Phaser.Scene {
     }
     this.wordPanel.createWordBlock(this.word);
   }
+  handleWordError() {
+    this.clearWord();
+    this.letterBoard.constructEmptyBlocks();
+    if (this.letterBoard.isAnyRowFull()) {
+      //! Game Over
+      this.handleGameOver();
+    } else {
+      this.processingAnswer = false;
+    }
+  }
   onWordTweenOver() {
     this.checkKeyStroke();
     this.processingAnswer = false;
@@ -136,13 +146,9 @@ class playGame extends Phaser.Scene {
       this.wordPanel.destroyWordBlocks();
       this.letterBoard.resetLetterCount();
       this.letterBoard.recenterLetterCounters();
-    
+
       this.sound.play('blocks_destroyed');
     }
-  }
-  handleWordError() {
-    this.clearWord();
-    this.processingAnswer = false;
   }
   handleGameOver() {}
   clearWord() {

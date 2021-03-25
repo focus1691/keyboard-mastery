@@ -42,6 +42,10 @@ class letterBoard extends Phaser.GameObjects.Container {
 
     this.scene.add.existing(this);
   }
+  isAnyRowFull() {
+    console.log(this.upperRowBlocks.length, this.middleRowBlocks.length, this.bottomRowBlocks.length);
+    return this.upperRowBlocks.length >= 20 || this.middleRowBlocks.length >= 20 || this.bottomRowBlocks.length >= 20;
+  }
   isKeyStroke() {
     return this.upperRowBlocks.length === this.middleRowBlocks.length && this.upperRowBlocks.length === this.bottomRowBlocks.length;
   }
@@ -55,17 +59,17 @@ class letterBoard extends Phaser.GameObjects.Container {
     while (this.upperRowBlocks.length > 0) {
       let { block, text, colour } = this.upperRowBlocks.shift();
       block.play(`destroy_${colour}_letter`);
-      text.destroy();
+      if (text) text.destroy();
     }
     while (this.middleRowBlocks.length > 0) {
       let { block, text, colour } = this.middleRowBlocks.shift();
       block.play(`destroy_${colour}_letter`);
-      text.destroy();
+      if (text) text.destroy();
     }
     while (this.bottomRowBlocks.length > 0) {
       let { block, text, colour } = this.bottomRowBlocks.shift();
       block.play(`destroy_${colour}_letter`);
-      text.destroy();
+      if (text) text.destroy();
     }
   }
   getTotalPoints() {
@@ -103,9 +107,33 @@ class letterBoard extends Phaser.GameObjects.Container {
     else if (KEYS[1].indexOf(letter) > -1) this.addMiddleBlock(block, text, colour, value);
     else if (KEYS[2].indexOf(letter) > -1) this.addBottomBlock(block, text, colour, value);
   }
+  constructEmptyBlocks() {
+    const colour = 'green';
+    const value = -1;
+
+    const block1 = this.constructEmptyBlock();
+    const block2 = this.constructEmptyBlock();
+    const block3 = this.constructEmptyBlock();
+
+    this.addTopBlock(block1, null, colour, value);
+    this.addMiddleBlock(block2, null, colour, value);
+    this.addBottomBlock(block3, null, colour, value);
+  }
+  constructEmptyBlock() {
+    const block = this.scene.make.sprite({
+      x: 0,
+      y: 0,
+      key: 'blocks_squares',
+      frame: 'green_square_000.png',
+      scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
+    });
+    block.on('animationcomplete', () => block.destroy(), this);
+    return block;
+  }
   addTopBlock(block, text, colour, value) {
     Phaser.Display.Align.In.Center(block, this.upperRow, SQUARE_W * (-9.5 + this.upperRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
-    Phaser.Display.Align.In.Center(text, block);
+
+    if (text) Phaser.Display.Align.In.Center(text, block);
 
     this.upperRowBlocks.push({ block, text, colour, value });
 
@@ -114,7 +142,8 @@ class letterBoard extends Phaser.GameObjects.Container {
   }
   addMiddleBlock(block, text, colour, value) {
     Phaser.Display.Align.In.Center(block, this.middleRow, SQUARE_W * (-9.5 + this.middleRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
-    Phaser.Display.Align.In.Center(text, block);
+
+    if (text) Phaser.Display.Align.In.Center(text, block);
 
     this.middleRowBlocks.push({ block, text, colour, value });
 
@@ -123,7 +152,8 @@ class letterBoard extends Phaser.GameObjects.Container {
   }
   addBottomBlock(block, text, colour, value) {
     Phaser.Display.Align.In.Center(block, this.bottomRow, SQUARE_W * (-9.5 + this.bottomRowBlocks.length) * ROW_SCALE_FACTOR_X, 0);
-    Phaser.Display.Align.In.Center(text, block);
+
+    if (text) Phaser.Display.Align.In.Center(text, block);
 
     this.bottomRowBlocks.push({ block, text, colour, value });
     this.bottomRowCount.setText(this.bottomRowBlocks.map(({ value }) => value).reduce((prev, curr) => prev + curr));
