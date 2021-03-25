@@ -75,23 +75,48 @@ class wordPanel extends Phaser.GameObjects.Container {
     });
     tile.setDisplaySize(text.displayWidth * 2, tile.displayHeight);
 
-    let offset = this.calculateWordBlockPosition(tile);
-
-    this.tiles.push({ tile, text });
-    Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
-    Phaser.Display.Align.In.Center(this.blockTail, tile);
-    Phaser.Display.Align.In.Center(text, tile, 0, 0);
-
+    this.placeWordBlockInPanel(tile, text);
     this.blockTail.setVisible(true);
-    console.log(offset, this.wordPanel.displayWidth, WIDTH);
 
-    if (offset >= WIDTH) {
-      this.destroyWordBlocksAt();
+    // The total width of the blocks with this new addition
+    let offset = this.calculateTotalWordBlocksWidth(tile);
+
+    // Check that the width of adding this block will not exceed the total width available
+    while (offset >= WIDTH && this.tiles.length > 0) {
+      // Update the offset with the removed blocks to make space
+      const blockSpace = this.destroyFirstWordBlock();
+      this.moveWordBlocksAlong(blockSpace);
+      // Calculate the full width with all of these blocks as the offset
+      offset = this.calculateTotalWordBlocksWidth(tile);
     }
 
+    // Update the offset to align with the next block / start if no blocks found
+    const xPos = this.calculateWordBlockPosition(tile);
+
+    // Slide it in after they are repositioned
+    this.slideWordInPosition(tile, text, xPos);
+
+    this.tiles.push({ tile, text });
+  }
+  calculateTotalWordBlocksWidth(tile) {
+    if (this.tiles.length > 0) {
+      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
+      return BLOCK_SPACE + x + tile.displayWidth;
+    }
+    return BLOCK_SPACE + tile.displayWidth;
+  }
+  calculateWordBlockPosition(tile) {
+    if (this.tiles.length > 0) {
+      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
+      return BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
+    }
+    return BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
+  }
+  slideWordInPosition(tile, text, xPos) {
+    // Block
     this.scene.tweens.add({
       targets: [tile, this.blockTail],
-      x: offset,
+      x: xPos,
       duration: 2500,
       ease: 'Power2',
       easeParams: [1.5, 0.5],
@@ -103,9 +128,10 @@ class wordPanel extends Phaser.GameObjects.Container {
       }.bind(this),
     });
 
+    // Text
     this.scene.tweens.add({
       targets: [text],
-      x: offset - (tile.displayWidth / 2 - text.displayWidth / 2),
+      x: xPos - (tile.displayWidth / 2 - text.displayWidth / 2),
       duration: 2500,
       ease: 'Power2',
       easeParams: [1.5, 0.5],
@@ -117,9 +143,10 @@ class wordPanel extends Phaser.GameObjects.Container {
       }.bind(this),
     });
 
+    // Tail
     this.scene.tweens.add({
       targets: [this.blockTail],
-      x: offset,
+      x: xPos,
       duration: 3500,
       ease: 'Power2',
       easeParams: [1.5, 0.5],
@@ -131,22 +158,28 @@ class wordPanel extends Phaser.GameObjects.Container {
         }
       }.bind(this),
     });
-
-    this.scene.sound.play('word_slide');
-
     this.activeTweens += 3;
+    this.scene.sound.play('word_slide');
   }
-  calculateWordBlockPosition(tile) {
-    if (this.tiles.length > 0) {
-      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
-      return BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
+  placeWordBlockInPanel(tile, text) {
+    Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
+    Phaser.Display.Align.In.Center(this.blockTail, tile);
+    Phaser.Display.Align.In.Center(text, tile, 0, 0);
+  }
+  moveWordBlocksAlong(freeSpace) {
+    for (let i = 0; i < this.tiles.length; i++) {
+      this.tiles[i].tile.x -= freeSpace;
+      this.tiles[i].text.x -= freeSpace;
     }
-    return BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
   }
-  destroyWordBlocksAt() {
+  destroyFirstWordBlock() {
+    if (this.tiles.length === 0) return 0;
+
     const { text, tile } = this.tiles.shift();
+    const { x, displayWidth } = tile;
     text.destroy();
     tile.destroy();
+    return x + displayWidth / 2;
   }
   destroyWordBlocks() {
     while (this.tiles.length > 0) {
