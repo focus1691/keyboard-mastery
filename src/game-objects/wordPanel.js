@@ -75,13 +75,7 @@ class wordPanel extends Phaser.GameObjects.Container {
     });
     tile.setDisplaySize(text.displayWidth * 2, tile.displayHeight);
 
-    let offset = 0;
-    if (this.tiles.length > 0) {
-      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
-      offset = BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
-    } else {
-      offset = BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
-    }
+    let offset = this.calculateWordBlockPosition(tile);
 
     this.tiles.push({ tile, text });
     Phaser.Display.Align.In.BottomCenter(tile, this.wordPanel, this.wordPanel.displayWidth, this.wordPanel.displayHeight - text.height);
@@ -141,6 +135,13 @@ class wordPanel extends Phaser.GameObjects.Container {
     this.scene.sound.play('word_slide');
 
     this.activeTweens += 3;
+  }
+  calculateWordBlockPosition(tile) {
+    if (this.tiles.length > 0) {
+      const { displayWidth, x } = this.tiles[this.tiles.length - 1].tile;
+      return BLOCK_SPACE + x + tile.displayWidth - (tile.displayWidth - displayWidth) / 2;
+    }
+    return BLOCK_SPACE + tile.displayWidth - tile.displayWidth / 2;
   }
   destroyWordBlocksAt() {
     const { text, tile } = this.tiles.shift();
