@@ -43,7 +43,6 @@ class letterBoard extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
   }
   isAnyRowFull() {
-    console.log(this.upperRowBlocks.length, this.middleRowBlocks.length, this.bottomRowBlocks.length);
     return this.upperRowBlocks.length >= 20 || this.middleRowBlocks.length >= 20 || this.bottomRowBlocks.length >= 20;
   }
   isKeyStroke() {
