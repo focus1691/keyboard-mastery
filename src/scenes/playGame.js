@@ -97,6 +97,9 @@ class playGame extends Phaser.Scene {
     this.wordPanel.setWord(this.word);
   }
   submitWord() {
+    // Only continue if there is input
+    if (!this.word || this.word.trim().length === 0) return;
+
     this.processingAnswer = true;
     if (!isPreviousWordUsed(this.usedWords, this.word) && binarySearch(this.wordList, this.word) > -1) {
       this.handleWordCorrect();
