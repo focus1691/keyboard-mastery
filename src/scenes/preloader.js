@@ -1,5 +1,6 @@
 //* Images
 import backgroundImg from '../assets/images/background.png';
+import backgroundMenuImg from '../assets/images/background_menu.png';
 import wordPanelImg from '../assets/images/word_panel.png';
 
 import keyboardContainer from '../assets/images/keyboard_container.png';
@@ -57,6 +58,7 @@ export default class preloaderScene extends Phaser.Scene {
     this.load.text('words', `${NODE_ENV === 'development' ? 'src/assets/words/' : ''}en.txt`);
 
     this.load.image('background', backgroundImg);
+    this.load.image('background_menu', backgroundMenuImg);
 
     this.load.image('word_panel', wordPanelImg);
 
@@ -103,6 +105,6 @@ export default class preloaderScene extends Phaser.Scene {
     this.loadingText.setText('Loading: ' + percentage.toFixed(2) + '%');
   }
   complete() {
-    this.scene.start('playGame');
+    this.scene.start('startMenu');
   }
 }
