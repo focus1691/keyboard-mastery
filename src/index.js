@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
+//* Scenes
 import preloader from './scenes/preloader';
+import startMenu from './scenes/startMenu';
 import playGame from './scenes/playGame';
+//* CSS
 import './css/style.css';
 
 const roundHalf = (num) => Math.round(num * 2) / 2;
@@ -25,7 +28,7 @@ const config = {
     mode: Phaser.DOM.FIT,
     autoCenter: Phaser.DOM.CENTER_BOTH,
   },
-  scene: [preloader, playGame],
+  scene: [preloader, startMenu, playGame],
 };
 
 const game = new Phaser.Game(config);
