@@ -12,6 +12,14 @@ class startMenu extends Phaser.Scene {
     this.isStarted = false;
   }
   create() {
+    //* Audio
+    if (this.sound.get('theme_song')) {
+      this.sound.stopByKey('theme_song');
+    } else {
+      this.sound.add('theme_song');
+      this.sound.volume = 0.2;
+    }
+
     this.make.image({ key: 'background_menu', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
 
     this.title = this.make.text({

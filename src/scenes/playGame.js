@@ -37,7 +37,6 @@ class playGame extends Phaser.Scene {
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
-
     this.zone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
 
     //* Replay
@@ -66,18 +65,16 @@ class playGame extends Phaser.Scene {
     Phaser.Display.Align.In.Center(this.scoreText, this.scoreBorder);
     Phaser.Display.Align.To.LeftCenter(this.scoreLabel, this.scoreBorder);
 
+    //* Sound
+    this.sound.play('theme_song', {
+      loop: true,
+    });
+
     //* Letter animations
     this.createAnimation('destroy_green_letter', 'blocks_squares', 'green_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_blue_letter', 'blocks_squares', 'blue_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_yellow_letter', 'blocks_squares', 'yellow_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_pink_letter', 'blocks_squares', 'pink_square_00', 0, 5, '.png', false, 0, 10);
-
-    //* Audio
-    this.sound.add('theme_song');
-    this.sound.volume = 0.2;
-    this.sound.play('theme_song', {
-      loop: true,
-    });
 
     this.input.keyboard.on(
       'keydown',
