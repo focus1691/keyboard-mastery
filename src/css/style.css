@@ -13,6 +13,10 @@ body {
     src: url("../assets/fonts/Paneuropa_Freeway.ttf");
 }
 
+@font-face {
+    font-family: "Paneuropa Road";
+    src: url("../assets/fonts/Paneuropa Road.ttf");
+}
 
 @font-face {
     font-family: "Chunk Five Print";

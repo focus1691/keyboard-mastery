@@ -108,6 +108,6 @@ export default class preloaderScene extends Phaser.Scene {
     this.loadingText.setText('Loading: ' + percentage.toFixed(2) + '%');
   }
   complete() {
-    this.scene.start('gameOver');
+    this.scene.start('startMenu');
   }
 }
