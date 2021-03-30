@@ -181,7 +181,9 @@ class playGame extends Phaser.Scene {
       this.sound.play('blocks_destroyed');
     }
   }
-  handleGameOver() {}
+  handleGameOver() {
+    this.scene.start('gameOver');
+  }
   clearWord() {
     this.word = '';
     this.updateWordDisplay();

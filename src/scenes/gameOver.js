@@ -1,4 +1,6 @@
 import { WIDTH, HEIGHT } from '../';
+//* Utils
+import createHighScores from '../utils/CreateHighScores';
 import { half } from '../utils/math';
 
 class gameOver extends Phaser.Scene {
@@ -23,7 +25,7 @@ class gameOver extends Phaser.Scene {
       x: 0,
       y: 0,
       text: 'High scores',
-      style: { fontFamily: 'Chunk Five Print', fontSize: '5rem', textAlign: 'center', color: '#81ADE5' },
+      style: { fontFamily: 'Chunk Five Print', fontSize: '4rem', strokeThickness: 3, textAlign: 'center', color: '#81ADE5' },
     });
 
     this.playBtn = this.make.image({
@@ -37,7 +39,7 @@ class gameOver extends Phaser.Scene {
     this.playBtn.setInteractive();
     this.playBtn.on('pointerup', this.handlePlay, this);
 
-    this.highScores = this.createHighScores();
+    this.highScores = createHighScores(this);
 
     this.highScoreContainer = this.make.image({
       x: 0,
@@ -62,7 +64,7 @@ class gameOver extends Phaser.Scene {
 
     //* High scores
     Phaser.Display.Align.To.BottomCenter(this.highScoreContainer, this.playBtn, 0, 0);
-    Phaser.Display.Align.In.TopCenter(this.highScoreTxt, this.highScoreContainer, 0, -this.highScoreTxt.height - 10);
+    Phaser.Display.Align.In.TopCenter(this.highScoreTxt, this.highScoreContainer, 0, -this.highScoreTxt.height - 30);
     Phaser.Display.Align.In.Center(this.highScoresTextWrapper, this.highScoreContainer);
 
     for (let i = 0; i < this.highScores.length; i++) {
@@ -71,8 +73,8 @@ class gameOver extends Phaser.Scene {
         Phaser.Display.Align.In.TopCenter(label, this.highScoresTextWrapper, -75, -40);
         Phaser.Display.Align.To.RightCenter(score, label, 50, 0);
       } else {
-        Phaser.Display.Align.To.BottomCenter(label, this.highScores[i-1].label, 0, 5);
-        Phaser.Display.Align.To.RightCenter(score, label, 50, 0); 
+        Phaser.Display.Align.To.BottomCenter(label, this.highScores[i - 1].label, 0, 5);
+        Phaser.Display.Align.To.RightCenter(score, label, 50, 0);
       }
       this.children.bringToTop(label);
       this.children.bringToTop(score);
@@ -85,25 +87,6 @@ class gameOver extends Phaser.Scene {
       this.time.delayedCall(1500, () => this.scene.start('playGame'), [], this);
       this.isRestarted = true;
     }
-  }
-  createHighScores() {
-    let scores = [];
-    for (let i = 1; i < 6; i++) {
-      const label = this.make.text({
-        x: 0,
-        y: 0,
-        text: `${i}.`,
-        style: { fontFamily: 'Paneuropa Road', fontSize: '3rem', textAlign: 'center', color: '#81ADE5' },
-      });
-      const score = this.make.text({
-        x: 0,
-        y: 0,
-        text: '100',
-        style: { fontFamily: 'Paneuropa Road', fontSize: '3rem', textAlign: 'center', color: '#81ADE5' },
-      });
-      scores.push({ label, score });
-    }
-    return scores;
   }
 }
 
