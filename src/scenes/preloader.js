@@ -17,6 +17,8 @@ import blocksSquares from '../assets/sprites/blocks_squares.png';
 import blocksSquaresJSON from '../assets/sprites/blocks_squares.json';
 import keyboard from '../assets/sprites/keyboard.png';
 import keyboardJSON from '../assets/sprites/keyboard.json';
+import menu from '../assets/sprites/menu.png';
+import menuJSON from '../assets/sprites/menu.json';
 
 //* Audio
 import glidingMusic from '../assets/audio/music_zapsplat_gliding_136.mp3';
@@ -79,6 +81,7 @@ export default class preloaderScene extends Phaser.Scene {
 
     this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
+    this.load.atlas('menu', menu, menuJSON);
 
     this.load.audio('theme_song', glidingMusic);
     this.load.audio('key_press', keyPressSound);
