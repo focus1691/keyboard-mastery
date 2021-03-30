@@ -35,14 +35,26 @@ class playGame extends Phaser.Scene {
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
+    this.scoreContainer = this.add.image(0, 0, 'menu', 'score_container.png');
+    this.scoreBorder = this.add.image(0, 0, 'menu', 'score.png');
+    this.scoreLabel = this.make.text({
+      x: 0,
+      y: 0,
+      text: 'Score:',
+      style: { fontFamily: 'Chunk Five Print', fontSize: '4rem', color: '#20176B' },
+    });
     this.scoreText = this.make.text({
       x: 0,
       y: 0,
       text: `${this.score}`,
-      style: { fontFamily: 'Paneuropa Freeway', fontSize: '7rem', strokeThickness: 3, color: '#000' },
+      style: { fontFamily: 'Paneuropa Freeway', fontSize: '5rem', strokeThickness: 3, color: '#000' },
     });
-    this.scoreZone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH - 20, HEIGHT - 20);
-    Phaser.Display.Align.In.TopRight(this.scoreText, this.scoreZone);
+    this.scoreZone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
+
+    Phaser.Display.Align.In.TopRight(this.scoreContainer, this.scoreZone);
+    Phaser.Display.Align.In.TopRight(this.scoreBorder, this.scoreContainer);
+    Phaser.Display.Align.In.Center(this.scoreText, this.scoreBorder);
+    Phaser.Display.Align.To.LeftCenter(this.scoreLabel, this.scoreBorder);
 
     //* Letter animations
     this.createAnimation('destroy_green_letter', 'blocks_squares', 'green_square_00', 0, 5, '.png', false, 0, 10);
@@ -142,7 +154,7 @@ class playGame extends Phaser.Scene {
       const points = this.letterBoard.getTotalPoints();
       this.score += points;
       this.scoreText.setText(this.score);
-      Phaser.Display.Align.In.TopRight(this.scoreText, this.scoreZone);
+      Phaser.Display.Align.In.Center(this.scoreText, this.scoreBorder);
 
       // Destroy blocks
       this.letterBoard.destroyBlocks();
