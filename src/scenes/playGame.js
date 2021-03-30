@@ -21,6 +21,7 @@ class playGame extends Phaser.Scene {
     this.usedWords = [];
     this.processingAnswer = false;
     this.score = 0;
+    this.isReplaying = false;
   }
   create() {
     this.wordList = this.cache.text
@@ -35,6 +36,15 @@ class playGame extends Phaser.Scene {
     this.keyboard = new Keyboard(this, { x: WIDTH / 2, y: HEIGHT - KEYBOARD_H * KEY_SCALE_FACTOR });
     this.wordPanel = new WordPanel(this, { x: 0, y: 0 });
 
+
+    this.zone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
+
+    //* Replay
+    this.replayBtn = this.add.image(0, 0, 'menu', 'replay.png').setInteractive();
+    this.replayBtn.on('pointerup', this.handleReplay, this);
+    Phaser.Display.Align.In.TopLeft(this.replayBtn, this.zone, 10, 10);
+
+    //* Score
     this.scoreContainer = this.add.image(0, 0, 'menu', 'score_container.png');
     this.scoreBorder = this.add.image(0, 0, 'menu', 'score.png');
     this.scoreLabel = this.make.text({
@@ -49,9 +59,8 @@ class playGame extends Phaser.Scene {
       text: `${this.score}`,
       style: { fontFamily: 'Paneuropa Freeway', fontSize: '5rem', strokeThickness: 3, color: '#000' },
     });
-    this.scoreZone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
 
-    Phaser.Display.Align.In.TopRight(this.scoreContainer, this.scoreZone);
+    Phaser.Display.Align.In.TopRight(this.scoreContainer, this.zone);
     Phaser.Display.Align.In.TopRight(this.scoreBorder, this.scoreContainer);
     Phaser.Display.Align.In.Center(this.scoreText, this.scoreBorder);
     Phaser.Display.Align.To.LeftCenter(this.scoreLabel, this.scoreBorder);
@@ -107,6 +116,13 @@ class playGame extends Phaser.Scene {
   }
   updateWordDisplay() {
     this.wordPanel.setWord(this.word);
+  }
+  handleReplay() {
+    if (!this.isReplaying) {
+      this.replayBtn.setFrame('replay_pressed.png');
+      this.time.delayedCall(1500, () => this.scene.start('startMenu'), [], this);
+      this.isReplaying = true;
+    }
   }
   submitWord() {
     // Only continue if there is input

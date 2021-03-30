@@ -178,7 +178,7 @@
 					}
 				},
 				{
-					"filename": "replay pressed.png",
+					"filename": "replay_pressed.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -283,7 +283,7 @@
 					}
 				},
 				{
-					"filename": "question_pressed-_.png",
+					"filename": "question_pressed.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -351,6 +351,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2e21dcbc24b32b99ffb09f81a023ca81:b9813e78f4f14b6f2ace589203c4b368:e1b68abd82547da08a80c89591506971$"
+		"smartupdate": "$TexturePacker:SmartUpdate:18ee8603dbde557f721f13338294a7a7:0eb916d1dc9985c986e7aea98320c758:e1b68abd82547da08a80c89591506971$"
 	}
 }
