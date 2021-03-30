@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import preloader from './scenes/preloader';
 import startMenu from './scenes/startMenu';
 import playGame from './scenes/playGame';
+import gameOver from './scenes/gameOver';
 //* CSS
 import './css/style.css';
 
@@ -28,7 +29,7 @@ const config = {
     mode: Phaser.DOM.FIT,
     autoCenter: Phaser.DOM.CENTER_BOTH,
   },
-  scene: [preloader, startMenu, playGame],
+  scene: [preloader, startMenu, playGame, gameOver],
 };
 
 const game = new Phaser.Game(config);
