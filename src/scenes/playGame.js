@@ -4,6 +4,7 @@ import LetterBoard from '../game-objects/letterBoard';
 import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
+import { BUTTON_HANG_TIME } from '../utils/constants/menu';
 import { binarySearch } from '../utils/search';
 import { isPreviousWordUsed } from '../utils/words';
 import { half } from '../utils/math';
@@ -120,7 +121,8 @@ class playGame extends Phaser.Scene {
   handleReplay() {
     if (!this.isReplaying) {
       this.replayBtn.setFrame('replay_pressed.png');
-      this.time.delayedCall(1500, () => this.scene.start('startMenu'), [], this);
+      this.sound.play('button_click');
+      this.time.delayedCall(BUTTON_HANG_TIME, () => this.scene.start('startMenu'), [], this);
       this.isReplaying = true;
     }
   }

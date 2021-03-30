@@ -21,6 +21,7 @@ import menu from '../assets/sprites/menu.png';
 import menuJSON from '../assets/sprites/menu.json';
 
 //* Audio
+import computerButtonPressSound from '../assets/audio/tspt_game_button_04_040.mp3';
 import glidingMusic from '../assets/audio/music_zapsplat_gliding_136.mp3';
 import sliderMovementSound from '../assets/audio/audio_mangler_tek_science_fiction_machine_burst_slider_movement_175.mp3';
 import keyPressSound from '../assets/audio/computer_apple_magic_keyboard_key_press_001_17520.mp3';
@@ -83,6 +84,7 @@ export default class preloaderScene extends Phaser.Scene {
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.atlas('menu', menu, menuJSON);
 
+    this.load.audio('button_click', computerButtonPressSound);
     this.load.audio('theme_song', glidingMusic);
     this.load.audio('key_press', keyPressSound);
     this.load.audio('word_slide', sliderMovementSound);

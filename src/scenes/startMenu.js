@@ -1,6 +1,7 @@
 import { WIDTH, HEIGHT } from '../';
 //* Utils
 import createHighScores from '../utils/CreateHighScores';
+import { BUTTON_HANG_TIME } from '../utils/constants/menu';
 import { half } from '../utils/math';
 
 class startMenu extends Phaser.Scene {
@@ -76,7 +77,8 @@ class startMenu extends Phaser.Scene {
   handlePlay() {
     if (!this.isStarted) {
       this.playBtn.setFrame('play_active.png');
-      this.time.delayedCall(1500, () => this.scene.start('playGame'), [], this);
+      this.sound.play('button_click');
+      this.time.delayedCall(BUTTON_HANG_TIME, () => this.scene.start('playGame'), [], this);
       this.isStarted = true;
     }
   }
