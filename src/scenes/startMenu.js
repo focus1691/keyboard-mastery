@@ -69,13 +69,15 @@ class startMenu extends Phaser.Scene {
 
     for (let i = 0; i < this.highScores.length; i++) {
       const { label, score } = this.highScores[i];
-      if (i === 0) {
-        Phaser.Display.Align.In.TopCenter(label, this.highScoresTextWrapper, -75, -40);
-        Phaser.Display.Align.To.RightCenter(score, label, 50, 0);
-      } else {
-        Phaser.Display.Align.To.BottomCenter(label, this.highScores[i - 1].label, 0, 5);
-        Phaser.Display.Align.To.RightCenter(score, label, 50, 0);
-      }
+      let xOffset = 0;
+      if (i === 0) xOffset = -40;
+      if (i === 1) xOffset = -50 * 2;
+      if (i === 2) xOffset = -53 * 3;
+      if (i === 3) xOffset = -53 * 4;
+      if (i === 4) xOffset = -55 * 5;
+
+      Phaser.Display.Align.In.TopCenter(label, this.highScoresTextWrapper, -75, xOffset);
+      Phaser.Display.Align.To.RightCenter(score, label, 50, 0);
       this.children.bringToTop(label);
       this.children.bringToTop(score);
     }
