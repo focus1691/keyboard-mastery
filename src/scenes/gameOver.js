@@ -1,6 +1,6 @@
 import { WIDTH, HEIGHT } from '../';
 //* Utils
-import createHighScores from '../utils/CreateHighScores';
+import createHighScores from '../utils/text/CreateHighScores';
 import { BUTTON_HANG_TIME } from '../utils/constants/menu';
 import { half } from '../utils/math';
 

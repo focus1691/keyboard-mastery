@@ -2,11 +2,14 @@
 import Keyboard from '../game-objects/keyboard';
 import LetterBoard from '../game-objects/letterBoard';
 import WordPanel from '../game-objects/wordPanel';
-//* Utils
+//* Constants
 import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { BUTTON_HANG_TIME } from '../utils/constants/menu';
+//* Utils
 import { binarySearch, isPreviousWordUsed } from '../utils/search';
 import { half } from '../utils/math';
+//* Storage
+import { setHighScores, updateHighScores } from '../storage';
 
 import { WIDTH, HEIGHT } from '..';
 
@@ -116,6 +119,10 @@ class playGame extends Phaser.Scene {
   }
   handleReplay() {
     if (!this.isReplaying) {
+      //* new high scores
+      const newHighScores = updateHighScores(this.score);
+      setHighScores(newHighScores);
+
       this.replayBtn.setFrame('replay_pressed.png');
       this.sound.play('button_click');
       this.time.delayedCall(BUTTON_HANG_TIME, () => this.scene.start('startMenu'), [], this);
@@ -180,6 +187,10 @@ class playGame extends Phaser.Scene {
     }
   }
   handleGameOver() {
+    //* new high scores
+    const newHighScores = updateHighScores(this.score);
+    setHighScores(newHighScores);
+
     this.scene.start('gameOver');
   }
   clearWord() {
@@ -188,9 +199,6 @@ class playGame extends Phaser.Scene {
   }
   addUsedWord(word) {
     this.usedWords.push(word);
-    if (this.usedWords.length > 20) {
-      this.usedWords.shift();
-    }
   }
   createAnimation(key, name, prefix, start, end, suffix, yoyo, repeat, frameRate) {
     this.anims.create({
