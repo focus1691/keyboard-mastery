@@ -57,6 +57,8 @@ class startMenu extends Phaser.Scene {
       scale: { x: 0.8, y: 0.8 },
     });
 
+    this.tutorialBtn = this.add.image(0, 0, 'menu', 'question.png');
+
     const zone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
 
     Phaser.Display.Align.In.TopCenter(this.title, zone, 0, -50);
@@ -66,6 +68,7 @@ class startMenu extends Phaser.Scene {
     Phaser.Display.Align.To.BottomCenter(this.highScoreContainer, this.playBtn, 0, 50);
     Phaser.Display.Align.In.TopCenter(this.highScoreTxt, this.highScoreContainer, 0, -this.highScoreTxt.height - 30);
     Phaser.Display.Align.In.Center(this.highScoresTextWrapper, this.highScoreContainer);
+    Phaser.Display.Align.In.BottomCenter(this.tutorialBtn, this.highScoreContainer, 0, -this.tutorialBtn.height / 2 - 30);
 
     for (let i = 0; i < this.highScores.length; i++) {
       const { label, score } = this.highScores[i];
