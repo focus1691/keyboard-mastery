@@ -29,7 +29,6 @@ class startMenu extends Phaser.Scene {
       style: { fontFamily: 'Chunk Five Print', fontSize: '10rem', color: '#81ADE5', textAlign: 'center' },
     });
 
-    // Chunk Five Print
     this.highScoreTxt = this.make.text({
       x: 0,
       y: 0,
@@ -57,7 +56,8 @@ class startMenu extends Phaser.Scene {
       scale: { x: 0.8, y: 0.8 },
     });
 
-    this.tutorialBtn = this.add.image(0, 0, 'menu', 'question.png');
+    this.tutorialBtn = this.add.image(0, 0, 'menu', 'question.png').setInteractive();
+    this.tutorialBtn.on('pointerup', this.handleTutorial, this);
 
     const zone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
 
@@ -94,6 +94,12 @@ class startMenu extends Phaser.Scene {
       this.time.delayedCall(BUTTON_HANG_TIME, () => this.scene.start('playGame'), [], this);
       this.isStarted = true;
     }
+  }
+  handleTutorial() {
+    console.log('handle tut');
+    this.scene.sleep();
+    this.scene.run('tutorial');
+    this.scene.bringToTop('tutorial');
   }
 }
 
