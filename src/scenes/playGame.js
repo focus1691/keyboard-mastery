@@ -5,8 +5,7 @@ import WordPanel from '../game-objects/wordPanel';
 //* Utils
 import { ALPHABET, MAX_LETTERS, KEYBOARD_H, KEY_SCALE_FACTOR } from '../utils/constants/keyboard';
 import { BUTTON_HANG_TIME } from '../utils/constants/menu';
-import { binarySearch } from '../utils/search';
-import { isPreviousWordUsed } from '../utils/words';
+import { binarySearch, isPreviousWordUsed } from '../utils/search';
 import { half } from '../utils/math';
 
 import { WIDTH, HEIGHT } from '..';

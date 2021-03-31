@@ -20,3 +20,7 @@ export const binarySearch = (items, value) => {
   //make sure it's the right value
   return (items[middle] != value) ? -1 : middle;
 }
+
+export const isPreviousWordUsed = (wordList, newWord) => {
+  return wordList.indexOf(newWord) > -1;
+};
