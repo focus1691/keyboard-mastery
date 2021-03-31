@@ -77,6 +77,7 @@ class playGame extends Phaser.Scene {
     this.createAnimation('destroy_blue_letter', 'blocks_squares', 'blue_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_yellow_letter', 'blocks_squares', 'yellow_square_00', 0, 5, '.png', false, 0, 10);
     this.createAnimation('destroy_pink_letter', 'blocks_squares', 'pink_square_00', 0, 5, '.png', false, 0, 10);
+    this.createAnimation('destroy_red_letter', 'blocks_squares', 'red_square_00', 0, 5, '.png', false, 0, 10);
 
     this.input.keyboard.on(
       'keydown',

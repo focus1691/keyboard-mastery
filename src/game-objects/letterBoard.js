@@ -107,23 +107,23 @@ class letterBoard extends Phaser.GameObjects.Container {
     else if (KEYS[2].indexOf(letter) > -1) this.addBottomBlock(block, text, colour, value);
   }
   constructEmptyBlocks() {
-    const colour = 'green';
+    const colour = 'red';
     const value = -1;
 
-    const block1 = this.constructEmptyBlock();
-    const block2 = this.constructEmptyBlock();
-    const block3 = this.constructEmptyBlock();
+    const block1 = this.constructEmptyBlock(colour);
+    const block2 = this.constructEmptyBlock(colour);
+    const block3 = this.constructEmptyBlock(colour);
 
     this.addTopBlock(block1, null, colour, value);
     this.addMiddleBlock(block2, null, colour, value);
     this.addBottomBlock(block3, null, colour, value);
   }
-  constructEmptyBlock() {
+  constructEmptyBlock(colour) {
     const block = this.scene.make.sprite({
       x: 0,
       y: 0,
       key: 'blocks_squares',
-      frame: 'green_square_000.png',
+      frame: `${colour}_square_000.png`,
       scale: { x: ROW_SCALE_FACTOR_X, y: ROW_SCALE_FACTOR_Y },
     });
     block.on('animationcomplete', () => block.destroy(), this);
