@@ -2,6 +2,7 @@ import { WIDTH, HEIGHT } from '../';
 //* Utils
 import { half } from '../utils/math';
 //* Instructions
+import KeyboardInstruction from '../game-objects/instructions/keyboard';
 import KeystrokeInstruction from '../game-objects/instructions/keystroke';
 import PointsInstruction from '../game-objects/instructions/points';
 import ErrorsInstruction from '../game-objects/instructions/errors';
@@ -13,7 +14,7 @@ class tutorial extends Phaser.Scene {
   }
   init() {
     this.currentPage = 1;
-    this.nInstructions = 4;
+    this.nInstructions = 5;
   }
   create() {
     this.make.image({ key: 'background_menu', x: 0, y: 0, width: this.cameras.main.width, origin: { x: 0, y: 0 }, scale: { x: 1, y: 1 } });
@@ -36,6 +37,7 @@ class tutorial extends Phaser.Scene {
       style: { fontFamily: 'Paneuropa Road', fontSize: '3rem', strokeThickness: 3, textAlign: 'center', color: '#81ADE5' },
     });
 
+    this.keyboardInstruction = new KeyboardInstruction(this);
     this.keystrokeInstruction = new KeystrokeInstruction(this);
     this.pointsInstruction = new PointsInstruction(this);
     this.errorsInstruction = new ErrorsInstruction(this);
@@ -58,6 +60,8 @@ class tutorial extends Phaser.Scene {
     Phaser.Display.Align.To.BottomCenter(this.pageTrackerTxt, this.instructions, 0, -this.pageTrackerTxt.height * 2);
 
     // Align instructions below the title inside the container
+
+    Phaser.Display.Align.In.BottomLeft(this.keyboardInstruction, this.title, 50, 50);
     Phaser.Display.Align.In.BottomLeft(this.keystrokeInstruction, this.title, 50, 50);
     Phaser.Display.Align.In.BottomLeft(this.pointsInstruction, this.title, 50, 50);
     Phaser.Display.Align.In.BottomLeft(this.errorsInstruction, this.title, 50, 50);
@@ -79,12 +83,14 @@ class tutorial extends Phaser.Scene {
     this.updateDisplayPage();
   }
   setInstructions() {
-    if (this.currentPage === 1) this.keystrokeInstruction.setVisible(true);
-    else if (this.currentPage === 2) this.pointsInstruction.setVisible(true);
-    else if (this.currentPage === 3) this.errorsInstruction.setVisible(true);
-    else if (this.currentPage === 4) this.wordsInstruction.setVisible(true);
+    if (this.currentPage === 1) this.keyboardInstruction.setVisible(true);
+    else if (this.currentPage === 2) this.keystrokeInstruction.setVisible(true);
+    else if (this.currentPage === 3) this.pointsInstruction.setVisible(true);
+    else if (this.currentPage === 4) this.errorsInstruction.setVisible(true);
+    else if (this.currentPage === 5) this.wordsInstruction.setVisible(true);
   }
   hideAllInstructions() {
+    this.keyboardInstruction.setVisible(false);
     this.keystrokeInstruction.setVisible(false);
     this.pointsInstruction.setVisible(false);
     this.errorsInstruction.setVisible(false);

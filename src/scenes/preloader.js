@@ -19,6 +19,8 @@ import keyboard from '../assets/sprites/keyboard.png';
 import keyboardJSON from '../assets/sprites/keyboard.json';
 import menu from '../assets/sprites/menu.png';
 import menuJSON from '../assets/sprites/menu.json';
+import instructions from '../assets/sprites/instructions.png';
+import instructionsJSON from '../assets/sprites/instructions.json';
 
 //* Audio
 import computerButtonPressSound from '../assets/audio/tspt_game_button_04_040.mp3';
@@ -83,6 +85,7 @@ export default class preloaderScene extends Phaser.Scene {
     this.load.atlas('blocks_squares', blocksSquares, blocksSquaresJSON);
     this.load.atlas('keyboard', keyboard, keyboardJSON);
     this.load.atlas('menu', menu, menuJSON);
+    this.load.atlas('instructions', instructions, instructionsJSON);
 
     this.load.audio('button_click', computerButtonPressSound);
     this.load.audio('theme_song', glidingMusic);

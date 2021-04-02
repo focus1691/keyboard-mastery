@@ -1,0 +1,125 @@
+{
+	"textures": [
+		{
+			"image": "instructions.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 867,
+				"h": 888
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "instruction_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 522,
+						"h": 406
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 522,
+						"h": 406
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 522,
+						"h": 406
+					}
+				},
+				{
+					"filename": "instruction_2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 341,
+						"h": 436
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 341,
+						"h": 436
+					},
+					"frame": {
+						"x": 525,
+						"y": 1,
+						"w": 341,
+						"h": 436
+					}
+				},
+				{
+					"filename": "instruction_5.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 522,
+						"h": 406
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 522,
+						"h": 406
+					},
+					"frame": {
+						"x": 1,
+						"y": 409,
+						"w": 522,
+						"h": 406
+					}
+				},
+				{
+					"filename": "instruction_3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 414,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 414,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 817,
+						"w": 414,
+						"h": 70
+					}
+				},
+				{
+					"filename": "instruction_4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 282,
+						"h": 311
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 282,
+						"h": 311
+					},
+					"frame": {
+						"x": 525,
+						"y": 439,
+						"w": 282,
+						"h": 311
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4fa00bf6ee5827dbb62b77d520c9812b:45301db7484f07225c47e10f97e8d90d:ea29714d2efc844924e9e2327afe016c$"
+	}
+}
