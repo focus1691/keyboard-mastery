@@ -1,5 +1,6 @@
 import { WIDTH, HEIGHT } from '../';
-//* Utils
+//* Util
+import { BUTTON_HANG_TIME } from '../utils/constants/menu';
 import { half } from '../utils/math';
 //* Instructions
 import KeyboardInstruction from '../game-objects/instructions/keyboard';
@@ -37,6 +38,10 @@ class tutorial extends Phaser.Scene {
       style: { fontFamily: 'Paneuropa Road', fontSize: '3rem', strokeThickness: 3, textAlign: 'center', color: '#81ADE5' },
     });
 
+    this.returnBtn = this.add.image(0, 0, 'menu', 'back.png').setInteractive();
+    this.returnBtn.setScale(0.5, 0.5);
+    this.returnBtn.on('pointerdown', this.handleReturn, this);
+
     this.keyboardInstruction = new KeyboardInstruction(this);
     this.keystrokeInstruction = new KeystrokeInstruction(this);
     this.pointsInstruction = new PointsInstruction(this);
@@ -50,6 +55,7 @@ class tutorial extends Phaser.Scene {
     this.rightArrow.on('pointerdown', this.handleNextPage, this);
 
     Phaser.Display.Align.In.Center(this.instructions, zone); // instructions in the center
+    Phaser.Display.Align.In.TopRight(this.returnBtn, this.instructions, 50, 20);
     Phaser.Display.Align.In.TopCenter(this.title, zone, 0, -this.title.height * 2 - 10); // Title in the top inside the instructions
 
     //* Left/right arrows inside the instructions panel to the bottom left/right, respectively
@@ -60,7 +66,6 @@ class tutorial extends Phaser.Scene {
     Phaser.Display.Align.To.BottomCenter(this.pageTrackerTxt, this.instructions, 0, -this.pageTrackerTxt.height * 2);
 
     // Align instructions below the title inside the container
-
     Phaser.Display.Align.In.BottomLeft(this.keyboardInstruction, this.title, 50, 50);
     Phaser.Display.Align.In.BottomLeft(this.keystrokeInstruction, this.title, 50, 50);
     Phaser.Display.Align.In.BottomLeft(this.pointsInstruction, this.title, 50, 50);
@@ -69,6 +74,17 @@ class tutorial extends Phaser.Scene {
 
     this.hideAllInstructions();
     this.setInstructions();
+  }
+  handleReturn() {
+    this.leftArrow.off('pointerdown');
+    this.rightArrow.off('pointerdown');
+
+    this.returnBtn.setFrame('back_pressed.png');
+    this.sound.play('button_click');
+    this.time.delayedCall(BUTTON_HANG_TIME, this.returnToMenu, [], this);
+  }
+  returnToMenu() {
+    this.scene.start('startMenu');
   }
   handlePrevPage() {
     this.currentPage -= this.currentPage > 1 ? 1 : 0;

@@ -4,74 +4,11 @@
 			"image": "menu.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1976,
-				"h": 1954
+				"w": 2048,
+				"h": 2048
 			},
 			"scale": 1,
 			"frames": [
-				{
-					"filename": "game_over.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 1320,
-						"h": 420
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 1320,
-						"h": 420
-					},
-					"frame": {
-						"x": 1,
-						"y": 1,
-						"w": 1320,
-						"h": 420
-					}
-				},
-				{
-					"filename": "high_score_names.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 652,
-						"h": 362
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 652,
-						"h": 362
-					},
-					"frame": {
-						"x": 1323,
-						"y": 1,
-						"w": 652,
-						"h": 362
-					}
-				},
-				{
-					"filename": "instruction_1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 522,
-						"h": 406
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 522,
-						"h": 406
-					},
-					"frame": {
-						"x": 1323,
-						"y": 365,
-						"w": 522,
-						"h": 406
-					}
-				},
 				{
 					"filename": "how_to_play.png",
 					"rotated": false,
@@ -88,156 +25,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 773,
+						"y": 1,
 						"w": 774,
 						"h": 1174
 					}
 				},
 				{
-					"filename": "instruction_4.png",
+					"filename": "game_over.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 282,
-						"h": 311
+						"w": 1320,
+						"h": 420
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 282,
-						"h": 311
+						"w": 1320,
+						"h": 420
 					},
 					"frame": {
 						"x": 1,
-						"y": 423,
-						"w": 282,
-						"h": 311
-					}
-				},
-				{
-					"filename": "arrow_left.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 79,
-						"h": 57
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 79,
-						"h": 57
-					},
-					"frame": {
-						"x": 1847,
-						"y": 365,
-						"w": 79,
-						"h": 57
-					}
-				},
-				{
-					"filename": "arrow_right.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 79,
-						"h": 57
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 79,
-						"h": 57
-					},
-					"frame": {
-						"x": 1847,
-						"y": 424,
-						"w": 79,
-						"h": 57
-					}
-				},
-				{
-					"filename": "score_container.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 486,
-						"h": 94
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 486,
-						"h": 94
-					},
-					"frame": {
-						"x": 777,
-						"y": 423,
-						"w": 486,
-						"h": 94
-					}
-				},
-				{
-					"filename": "play_again.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 827,
-						"h": 200
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 827,
-						"h": 200
-					},
-					"frame": {
-						"x": 285,
-						"y": 519,
-						"w": 827,
-						"h": 200
-					}
-				},
-				{
-					"filename": "score.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 254,
-						"h": 88
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 254,
-						"h": 88
-					},
-					"frame": {
-						"x": 285,
-						"y": 423,
-						"w": 254,
-						"h": 88
-					}
-				},
-				{
-					"filename": "instruction_3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 414,
-						"h": 70
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 414,
-						"h": 70
-					},
-					"frame": {
-						"x": 777,
-						"y": 721,
-						"w": 414,
-						"h": 70
+						"y": 1177,
+						"w": 1320,
+						"h": 420
 					}
 				},
 				{
@@ -255,10 +66,31 @@
 						"h": 814
 					},
 					"frame": {
-						"x": 1193,
-						"y": 773,
+						"x": 777,
+						"y": 1,
 						"w": 774,
 						"h": 814
+					}
+				},
+				{
+					"filename": "play_again.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 827,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 827,
+						"h": 200
+					},
+					"frame": {
+						"x": 777,
+						"y": 817,
+						"w": 827,
+						"h": 200
 					}
 				},
 				{
@@ -276,8 +108,8 @@
 						"h": 200
 					},
 					"frame": {
-						"x": 777,
-						"y": 793,
+						"x": 1553,
+						"y": 1,
 						"w": 408,
 						"h": 200
 					}
@@ -297,51 +129,9 @@
 						"h": 200
 					},
 					"frame": {
-						"x": 777,
-						"y": 995,
+						"x": 1553,
+						"y": 203,
 						"w": 406,
-						"h": 200
-					}
-				},
-				{
-					"filename": "instruction_2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 341,
-						"h": 436
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 341,
-						"h": 436
-					},
-					"frame": {
-						"x": 777,
-						"y": 1197,
-						"w": 341,
-						"h": 436
-					}
-				},
-				{
-					"filename": "play_again_active.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 826,
-						"h": 200
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 826,
-						"h": 200
-					},
-					"frame": {
-						"x": 1120,
-						"y": 1589,
-						"w": 826,
 						"h": 200
 					}
 				},
@@ -360,52 +150,31 @@
 						"h": 162
 					},
 					"frame": {
-						"x": 777,
-						"y": 1791,
+						"x": 1553,
+						"y": 405,
 						"w": 237,
 						"h": 162
 					}
 				},
 				{
-					"filename": "question.png",
+					"filename": "score_container.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 278,
-						"h": 149
+						"w": 486,
+						"h": 94
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 278,
-						"h": 149
+						"w": 486,
+						"h": 94
 					},
 					"frame": {
-						"x": 777,
-						"y": 1635,
-						"w": 278,
-						"h": 149
-					}
-				},
-				{
-					"filename": "question_pressed.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 280,
-						"h": 146
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 280,
-						"h": 146
-					},
-					"frame": {
-						"x": 1016,
-						"y": 1791,
-						"w": 280,
-						"h": 146
+						"x": 1553,
+						"y": 569,
+						"w": 486,
+						"h": 94
 					}
 				},
 				{
@@ -423,10 +192,199 @@
 						"h": 139
 					},
 					"frame": {
-						"x": 1298,
-						"y": 1791,
+						"x": 1792,
+						"y": 405,
 						"w": 234,
 						"h": 139
+					}
+				},
+				{
+					"filename": "arrow_left.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 79,
+						"h": 57
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 79,
+						"h": 57
+					},
+					"frame": {
+						"x": 1961,
+						"y": 203,
+						"w": 79,
+						"h": 57
+					}
+				},
+				{
+					"filename": "arrow_right.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 79,
+						"h": 57
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 79,
+						"h": 57
+					},
+					"frame": {
+						"x": 1961,
+						"y": 262,
+						"w": 79,
+						"h": 57
+					}
+				},
+				{
+					"filename": "question_pressed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 280,
+						"h": 146
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 280,
+						"h": 146
+					},
+					"frame": {
+						"x": 1553,
+						"y": 665,
+						"w": 280,
+						"h": 146
+					}
+				},
+				{
+					"filename": "high_score_names.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 652,
+						"h": 362
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 652,
+						"h": 362
+					},
+					"frame": {
+						"x": 1323,
+						"y": 1019,
+						"w": 652,
+						"h": 362
+					}
+				},
+				{
+					"filename": "question.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 278,
+						"h": 149
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 278,
+						"h": 149
+					},
+					"frame": {
+						"x": 1606,
+						"y": 813,
+						"w": 278,
+						"h": 149
+					}
+				},
+				{
+					"filename": "back.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 278,
+						"h": 147
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 278,
+						"h": 147
+					},
+					"frame": {
+						"x": 777,
+						"y": 1019,
+						"w": 278,
+						"h": 147
+					}
+				},
+				{
+					"filename": "score.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 254,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 254,
+						"h": 88
+					},
+					"frame": {
+						"x": 1057,
+						"y": 1019,
+						"w": 254,
+						"h": 88
+					}
+				},
+				{
+					"filename": "back_pressed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 278,
+						"h": 147
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 278,
+						"h": 147
+					},
+					"frame": {
+						"x": 1323,
+						"y": 1383,
+						"w": 278,
+						"h": 147
+					}
+				},
+				{
+					"filename": "play_again_active.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 826,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 826,
+						"h": 200
+					},
+					"frame": {
+						"x": 1,
+						"y": 1599,
+						"w": 826,
+						"h": 200
 					}
 				}
 			]
@@ -435,6 +393,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:4b9a43ae03adffdbe47d4dd0aafde696:37e9ee829fd07afd45cf6305bd51a64f:e1b68abd82547da08a80c89591506971$"
+		"smartupdate": "$TexturePacker:SmartUpdate:3d85678fd59db2fe1e98557ec4a3af86:0e3af1debbe01a24bd71423902d39c82:e1b68abd82547da08a80c89591506971$"
 	}
 }

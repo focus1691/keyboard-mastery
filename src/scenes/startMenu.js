@@ -61,8 +61,8 @@ class startMenu extends Phaser.Scene {
 
     const zone = this.add.zone(half(WIDTH), half(HEIGHT), WIDTH, HEIGHT);
 
-    Phaser.Display.Align.In.TopCenter(this.title, zone, 0, -50);
-    Phaser.Display.Align.To.BottomCenter(this.playBtn, this.title, 0, 50);
+    Phaser.Display.Align.In.TopCenter(this.title, zone, 0, -50); // title top center
+    Phaser.Display.Align.To.BottomCenter(this.playBtn, this.title, 0, 50); // play button below it
 
     //* High scores
     Phaser.Display.Align.To.BottomCenter(this.highScoreContainer, this.playBtn, 0, 50);
@@ -96,10 +96,7 @@ class startMenu extends Phaser.Scene {
     }
   }
   handleTutorial() {
-    console.log('handle tut');
-    this.scene.sleep();
-    this.scene.run('tutorial');
-    this.scene.bringToTop('tutorial');
+    this.scene.start('tutorial');
   }
 }
 
