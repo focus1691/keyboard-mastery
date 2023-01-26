@@ -16,7 +16,7 @@ Instructions:
 4. The game ends if either of the three rows spans beyond the maximum row size and not cleared.
 
 
-[Play Here](https://traderjosh.itch.io/keyboard-mastery)
+[Play Here](https://focus16.itch.io/keyboard-mastery)
 
 ## Software
 
