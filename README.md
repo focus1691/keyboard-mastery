@@ -1,6 +1,6 @@
 # Keyboard Mastery
 
-A keyword word game.
+Keyboard Mastery is a unique word game that challenges your typing skills and knowledge of the keyboard layout. The objective is to strategically position words based on their corresponding keyboard rows, and earn points similar to the classic game Scrabble.
 
 Instructions:
 
